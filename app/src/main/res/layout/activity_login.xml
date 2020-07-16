@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.main.MainActivity"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/login_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        app:title="@string/login"
+        app:titleTextAppearance="@style/ActionBar.nameText"
+        android:elevation="2dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="40dp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/id"
+        android:textSize="15sp"
+        android:layout_marginStart="30dp"/>
+    <EditText
+        android:id="@+id/login_et_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/id_hint"
+        android:background="@drawable/border_empty"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:paddingTop="13dp"
+        android:paddingBottom="13dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="15dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pw"
+            android:textSize="15sp"
+            android:layout_marginStart="30dp"/>
+        <EditText
+            android:id="@+id/login_et_pw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/pw_hint"
+            android:background="@drawable/border_empty"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:paddingTop="13dp"
+            android:paddingBottom="13dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/login_tv_login_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/login"
+        android:textSize="20sp"
+        android:textColor="@color/colorWhite"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:gravity="center"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/btn_login_background"
+        android:onClick="customOnClick"/>
+
+</LinearLayout>
