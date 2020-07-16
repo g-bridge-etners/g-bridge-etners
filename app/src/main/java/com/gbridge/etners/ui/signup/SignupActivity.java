@@ -25,9 +25,9 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class SignupActivity extends AppCompatActivity implements View.OnClickListener {
-    Toolbar toolbar;
-    EditText edtId, edtPw, edtPwCheck, edtName;
-    Button btnSignup;
+    private Toolbar toolbar;
+    private EditText edtId, edtPw, edtPwCheck, edtName;
+    private Button btnSignup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
