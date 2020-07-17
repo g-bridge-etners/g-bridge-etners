@@ -39,6 +39,6 @@ public class DailyAttendanceReportFragment extends Fragment {
                              Bundle savedInstanceState) {
         Log.d(TAG, "onCreateView: RUN");
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_time_attendance_report, container, false);
+        return inflater.inflate(R.layout.fragment_daily_attendance_report, container, false);
     }
 }
