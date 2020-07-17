@@ -3,7 +3,6 @@ package com.gbridge.etners.ui.admin;
 import android.content.Context;
 import android.os.Bundle;
 
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,7 +17,7 @@ import com.gbridge.etners.ui.admin.dummy.DummyContent;
 /**
  * A fragment representing a list of Items.
  */
-public class IndividualScheduleManagementFragment extends BaseFragment {
+public class EmployeeAttendanceManagementFragment extends BaseFragment {
 
     // TODO: Customize parameter argument names
     private static final String TAG = "ISM";
@@ -27,13 +26,13 @@ public class IndividualScheduleManagementFragment extends BaseFragment {
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public IndividualScheduleManagementFragment() {
+    public EmployeeAttendanceManagementFragment() {
     }
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static IndividualScheduleManagementFragment newInstance() {
-        IndividualScheduleManagementFragment fragment = new IndividualScheduleManagementFragment();
+    public static EmployeeAttendanceManagementFragment newInstance() {
+        EmployeeAttendanceManagementFragment fragment = new EmployeeAttendanceManagementFragment();
         return fragment;
     }
 
@@ -47,7 +46,7 @@ public class IndividualScheduleManagementFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_individual_schedule_management, container, false);
+        View view = inflater.inflate(R.layout.fragment_employee_attendance_management, container, false);
 
         if (view instanceof RecyclerView) {
             Context context = view.getContext();

@@ -9,5 +9,5 @@
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
-    tools:context=".ui.admin.IndividualScheduleManagementFragment"
-    tools:listitem="@layout/item_individual_schedule_management" />
+    tools:context=".ui.admin.EmployeeAttendanceManagementFragment"
+    tools:listitem="@layout/item_employee_attendance_management" />
