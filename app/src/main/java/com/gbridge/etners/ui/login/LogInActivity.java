@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -16,6 +17,8 @@ import androidx.appcompat.widget.Toolbar;
 import com.gbridge.etners.BaseActivity;
 import com.gbridge.etners.R;
 import com.gbridge.etners.ui.login.interfaces.LogInActivityView;
+import com.gbridge.etners.ui.main.MainActivity;
+import com.gbridge.etners.ui.signup.SignupActivity;
 
 import static com.gbridge.etners.ApplicationClass.X_ACCESS_TOKEN;
 import static com.gbridge.etners.ApplicationClass.sSharedPreferences;
@@ -24,6 +27,7 @@ public class LogInActivity extends BaseActivity implements LogInActivityView {
 
     EditText mEtId, mEtPw;
     TextView mTvBtnLogin;
+    Button btnSignup;
 
     String id, pw;
     Boolean bId, bPw;
@@ -49,7 +53,7 @@ public class LogInActivity extends BaseActivity implements LogInActivityView {
         mEtId = findViewById(R.id.login_et_id);
         mEtPw = findViewById(R.id.login_et_pw);
         mTvBtnLogin = findViewById(R.id.login_tv_login_btn);
-
+        btnSignup = findViewById(R.id.login_signupButton);
     }
 
     private boolean checkValid(){
@@ -91,10 +95,11 @@ public class LogInActivity extends BaseActivity implements LogInActivityView {
             SharedPreferences.Editor editor = sSharedPreferences.edit();
             editor.putString(X_ACCESS_TOKEN,token);
             editor.commit();
-            Intent resultIntent = new Intent();
+            Intent resultIntent = new Intent(this, MainActivity.class);
             resultIntent.putExtra("id", mEtId.getText().toString());
             resultIntent.putExtra("token",X_ACCESS_TOKEN);
             setResult(1, resultIntent);
+            startActivity(resultIntent);
             showCustomToast(mEtId.getText().toString() + "로그인성공");
         }else{
             showCustomToast(message);
@@ -111,11 +116,10 @@ public class LogInActivity extends BaseActivity implements LogInActivityView {
                     showCustomToast("사원번호와 비밀번호를 확인하세요");
                 }
                 break;
-//            case R.id.tv_btn_signin:
-//                Intent intent = new Intent(this, SignInActivity.class);
-//                startActivity(intent);
-//                showCustomToast("회원가입버튼");
-//                break;
+            case R.id.login_signupButton:
+                Intent intent = new Intent(this, SignupActivity.class);
+                startActivity(intent);
+                break;
             default:
                 break;
         }
