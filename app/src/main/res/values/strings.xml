@@ -17,6 +17,20 @@
     <string name="signup_toast_pwLengthFail">비밀번호는 6자리 이상이여야 합니다.</string>
     <string name="signup_toast_success">회원가입이 완료되었습니다. 다시 로그인 해 주세요.</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- *****************************************************************************************
+                                           Admin 관련 String
+    *******************************************************************************************-->
+    <!-- Admin 레이아웃별 제목 -->
+    <string name="admin_home_title">관리자 메뉴</string>
+    <string name="admin_employee_attendance_management_title">사원별 근태 관리</string>
+    <string name="admin_daily_attendance_report_title">근태 현황 리포트</string>
+    <string name="admin_weekly_attendance_report_title">주 52시간 리포트</string>
+
+    <!-- Admin Home -->
+    <string name="admin_home_menu_attendance_management_title">근무 관리</string>
+    <string name="admin_home_menu_attendance_report_title">근무 기록</string>
+
+    <string name="hello_blank_fragment">임시</string>
+
 </resources>
