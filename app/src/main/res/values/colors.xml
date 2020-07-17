@@ -3,6 +3,9 @@
     <color name="colorPrimary">#ff9800</color>
     <color name="colorPrimaryDark">#f57c00</color>
     <color name="colorAccent">#ff5722</color>
-    <color name="colorGray">#7f7f7f</color>
+  
     <color name="colorWhite">#ffffff</color>
+    <color name="colorBalck">#000000</color>
+    <color name="colorDefault">#ECECEC</color>
+    <color name="colorGray">#7f7f7f</color>
 </resources>
