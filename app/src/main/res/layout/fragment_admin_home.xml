@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.admin.AdminHomeFragment">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@drawable/divider_admin"
+        android:orientation="vertical"
+        android:showDividers="middle|end"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            style="@style/admin_home_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/admin_home_menu_attendance_management_title" />
+
+
+        <Button
+            android:id="@+id/btn_admin_home_employee_attendance_management"
+            style="@style/admin_home_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/admin_employee_attendance_management_title" />
+
+
+        <TextView
+            style="@style/admin_home_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="@string/admin_home_menu_attendance_report_title" />
+
+
+        <Button
+            android:id="@+id/btn_admin_home_daily_attendance_report"
+            style="@style/admin_home_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/admin_daily_attendance_report_title" />
+
+
+        <Button
+            android:id="@+id/btn_admin_home_weekly_attendance_report"
+            style="@style/admin_home_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/admin_weekly_attendance_report_title" />
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
