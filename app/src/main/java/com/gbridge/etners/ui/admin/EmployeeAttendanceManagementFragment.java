@@ -14,7 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.gbridge.etners.R;
-import com.gbridge.etners.ui.admin.adapter.MyIndividualScheduleManagementRecyclerViewAdapter;
+import com.gbridge.etners.ui.admin.adapter.EmployeeAttendanceManagementAdapter;
 import com.gbridge.etners.ui.admin.dummy.DummyContent;
 
 
@@ -54,7 +54,7 @@ public class EmployeeAttendanceManagementFragment extends BaseFragment {
             RecyclerView recyclerView = (RecyclerView) view;
 
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            recyclerView.setAdapter(new MyIndividualScheduleManagementRecyclerViewAdapter(DummyContent.ITEMS));
+            recyclerView.setAdapter(new EmployeeAttendanceManagementAdapter(DummyContent.ITEMS));
         }
         return view;
     }
