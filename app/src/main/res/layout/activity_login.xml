@@ -85,4 +85,14 @@
         android:background="@drawable/btn_login_background"
         android:onClick="customOnClick"/>
 
+    <Button
+        android:id="@+id/login_signupButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_button"
+        android:text="@string/signup_buttonText"
+        android:textColor="@color/colorWhite"
+        android:layout_marginTop="16dp"
+        android:onClick="customOnClick"/>
+
 </LinearLayout>
