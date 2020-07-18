@@ -1,20 +1,146 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/item_number"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:textAppearance="?attr/textAppearanceListItem" />
+        android:paddingVertical="8dp"
+        android:paddingStart="@dimen/admin_layout_horizontal_padding">
 
-    <TextView
-        android:id="@+id/content"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:textAppearance="?attr/textAppearanceListItem" />
+        <TextView
+            android:id="@+id/item_employee_attendance_management_department"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_round_primary_view"
+            android:paddingHorizontal="3dp"
+            android:paddingVertical="1dp"
+            android:textColor="@color/colorWhiteSmoke"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/item_employee_attendance_management_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorSoftblack"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/item_employee_attendance_management_department" />
+
+        <TextView
+            android:id="@+id/item_employee_attendance_management_employee_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textColor="@color/colorGray"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@id/item_employee_attendance_management_time_title"
+            app:layout_constraintStart_toEndOf="@id/item_employee_attendance_management_name" />
+
+        <TextView
+            android:textSize="12sp"
+            android:id="@+id/item_employee_attendance_management_time_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/item_employee_attendance_management_time"
+            android:textColor="@color/colorSilver"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/item_employee_attendance_management_name" />
+
+        <TextView
+            android:textSize="12sp"
+            android:id="@+id/item_employee_attendance_management_start_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorSilver"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/item_employee_attendance_management_time_title" />
+
+        <TextView
+            android:textSize="12sp"
+            android:id="@+id/item_employee_attendance_management_time_divider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/item_employee_attendance_management_time_or_date_divider"
+            android:textColor="@color/colorSilver"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/item_employee_attendance_management_start_time" />
+
+        <TextView
+            android:textSize="12sp"
+            android:id="@+id/item_employee_attendance_management_end_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorSilver"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/item_employee_attendance_management_time_divider"
+            app:layout_constraintTop_toBottomOf="@id/item_employee_attendance_management_name" />
+
+        <TextView
+            android:textSize="12sp"
+            android:id="@+id/item_employee_attendance_management_date_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="@string/item_employee_attendance_management_date"
+            android:textColor="@color/colorSilver"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/item_employee_attendance_management_end_time"
+            app:layout_constraintTop_toBottomOf="@id/item_employee_attendance_management_name" />
+
+        <TextView
+            android:textSize="12sp"
+            android:id="@+id/item_employee_attendance_management_start_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorSilver"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/item_employee_attendance_management_date_title" />
+
+        <TextView
+
+            android:textSize="12sp"
+            android:id="@+id/item_employee_attendance_management_date_divider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/item_employee_attendance_management_time_or_date_divider"
+            android:textColor="@color/colorSilver"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/item_employee_attendance_management_start_date" />
+
+        <TextView
+            android:textSize="12sp"
+            android:id="@+id/item_employee_attendance_management_end_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorSilver"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/item_employee_attendance_management_date_divider"
+            app:layout_constraintTop_toBottomOf="@id/item_employee_attendance_management_name" />
+
+        <Button
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:id="@+id/btn_employee_attendance_management_options"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="10dp"
+            android:stateListAnimator="@null"
+            android:text="@string/text_option_menu"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </LinearLayout>

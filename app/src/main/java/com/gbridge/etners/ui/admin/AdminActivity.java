@@ -21,7 +21,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class AdminActivity extends AppCompatActivity {
 
     private FragmentManager fragmentManager = getSupportFragmentManager();
-    private FrameLayout container;
 
 
 

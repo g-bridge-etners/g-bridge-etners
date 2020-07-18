@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingHorizontal="12dp"
+    android:paddingVertical="18dp">
+
+    <TextView
+        style="@style/dialog_attendance_management_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dialog_attendance_management_title_text" />
+
+    <EditText
+        android:id="@+id/edt_dialog_attendance_management_title"
+        style="@style/dialog_attendance_management_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_round_border_admin"
+        android:hint="@string/dialog_attendance_management_title_hint"
+        android:inputType="text" />
+
+    <TextView
+        style="@style/dialog_attendance_management_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="@string/dialog_attendance_management_description_text" />
+
+    <EditText
+        android:id="@+id/edt_dialog_attendance_management_description"
+        style="@style/dialog_attendance_management_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/bg_round_border_admin"
+        android:gravity="top"
+        android:hint="@string/dialog_attendance_management_description_hint"
+        android:inputType="textMultiLine"
+        android:maxLines="3"
+        android:minLines="3" />
+
+    <TextView
+        style="@style/dialog_attendance_management_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/dialog_attendance_management_start_date_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/edt_dialog_attendance_management_start_date"
+        style="@style/dialog_attendance_management_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_round_border_admin"
+        android:cursorVisible="false"
+        android:drawableEnd="@drawable/ic_calendar_softblack"
+        android:focusable="false"
+        android:hint="@string/dialog_attendance_management_date_hint"
+        android:inputType="date"
+        android:maxLines="1" />
+
+    <TextView
+        style="@style/dialog_attendance_management_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="@string/dialog_attendance_management_end_date_text" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/edt_dialog_attendance_management_end_date"
+        style="@style/dialog_attendance_management_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_round_border_admin"
+        android:cursorVisible="false"
+        android:drawableEnd="@drawable/ic_calendar_softblack"
+        android:focusable="false"
+        android:hint="@string/dialog_attendance_management_date_hint"
+        android:inputType="date" />
+
+    <TextView
+        style="@style/dialog_attendance_management_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/dialog_attendance_management_start_time_text" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/edt_dialog_attendance_management_start_time"
+        style="@style/dialog_attendance_management_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_round_border_admin"
+        android:cursorVisible="false"
+        android:drawableEnd="@drawable/ic_schedule_softblack"
+        android:focusable="false"
+        android:hint="@string/dialog_attendance_management_time_hint" />
+
+    <TextView
+        style="@style/dialog_attendance_management_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="@string/dialog_attendance_management_end_time_text" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/edt_dialog_attendance_management_end_time"
+        style="@style/dialog_attendance_management_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_round_border_admin"
+        android:cursorVisible="false"
+        android:drawableEnd="@drawable/ic_schedule_softblack"
+        android:focusable="false"
+        android:hint="@string/dialog_attendance_management_time_hint" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:textColor="@color/colorSoftblack"
+            android:id="@+id/btn_dialog_attendance_management_cancle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_primary_button"
+            android:text="취소"
+            android:textSize="16sp" />
+
+        <Button
+            android:textColor="@color/colorSoftblack"
+            android:id="@+id/btn_dialog_attendance_management_submit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_primary_button"
+            android:text="만들기"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+
+</LinearLayout>
