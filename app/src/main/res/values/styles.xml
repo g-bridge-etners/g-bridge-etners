@@ -27,12 +27,30 @@
         <item name="android:paddingRight">@dimen/admin_layout_horizontal_padding</item>
         <item name="android:paddingTop">14dp</item>
         <item name="android:paddingBottom">14dp</item>
-        <item name="android:background">@drawable/bg_admin_home_button</item>
+        <item name="android:background">@drawable/bg_white_button</item>
         <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:textAlignment">viewStart</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/colorSoftblack</item>
     </style>
+
+    <style name="dialog_attendance_management_edit_text">
+        <item name="android:textColor">@color/colorSoftblack</item>
+        <item name="android:layout_marginLeft">8dp</item>
+        <item name="android:layout_marginRight">8dp</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:paddingLeft">12dp</item>
+        <item name="android:paddingRight">12dp</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:paddingBottom">4dp</item>
+    </style>
+
+    <style name="dialog_attendance_management_textview">
+        <item name="android:textColor">@color/colorSoftblack</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:layout_marginLeft">8dp</item>
+    </style>
+
 
 </resources>

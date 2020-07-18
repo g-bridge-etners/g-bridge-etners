@@ -31,6 +31,24 @@
     <string name="admin_home_menu_attendance_management_title">근무 관리</string>
     <string name="admin_home_menu_attendance_report_title">근무 기록</string>
 
-    <string name="hello_blank_fragment">임시</string>
 
+    <!-- Admin Employee Attendance Management -->
+    <string name="menu_item_employee_attendance_management_edit">근태 관리</string>
+    <string name="text_option_menu">⋮</string>
+    <string name="dialog_attendance_management_title_text">일정 제목</string>
+    <string name="dialog_attendance_management_title_hint">제목을 작성해주세요.</string>
+    <string name="dialog_attendance_management_description_text">일정 설명</string>
+    <string name="dialog_attendance_management_description_hint">설명을 작성해주세요.</string>
+    <string name="dialog_attendance_management_start_date_text">시작 일자</string>
+    <string name="dialog_attendance_management_end_date_text">종료 일자</string>
+    <string name="dialog_attendance_management_date_hint">yy-MM-dd</string>
+    <string name="dialog_attendance_management_start_time_text">시작 시간</string>
+    <string name="dialog_attendance_management_end_time_text">종료 시간</string>
+    <string name="dialog_attendance_management_time_hint">HH:mm</string>
+    <string name="item_employee_attendance_management_time">근무시간 : </string>
+    <string name="item_employee_attendance_management_date">근무기간 : </string>
+    <string name="item_employee_attendance_management_time_or_date_divider">~</string>
+
+
+    <string name="hello_blank_fragment">임시</string>
 </resources>
