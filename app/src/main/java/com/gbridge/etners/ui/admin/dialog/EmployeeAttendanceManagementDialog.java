@@ -38,11 +38,6 @@ public abstract class EmployeeAttendanceManagementDialog extends Dialog implemen
     private Activity activity;
 
 
-    public EmployeeAttendanceManagementDialog(@NonNull Activity activity) {
-        super(activity);
-        this.activity = activity;
-    }
-
     public EmployeeAttendanceManagementDialog(@NonNull Activity activity, EmployeeAttendanceManagementItem item) {
         super(activity);
         this.item = item;
@@ -69,6 +64,15 @@ public abstract class EmployeeAttendanceManagementDialog extends Dialog implemen
         edtEndTime.setOnClickListener(this);
         btnSubmit.setOnClickListener(this);
         btnCancle.setOnClickListener(this);
+
+        if(item != null){
+            edtTitle.setText(item.getTitle());
+            edtDescription.setText(item.getDescription());
+            edtStartDate.setText(item.getStartDate());
+            edtEndDate.setText(item.getEndDate());
+            edtStartTime.setText(item.getStartTime());
+            edtEndTime.setText(item.getEndTime());
+        }
 
     }
 

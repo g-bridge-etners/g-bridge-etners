@@ -40,12 +40,12 @@
             android:layout_marginStart="8dp"
             android:textColor="@color/colorGray"
             android:textSize="14sp"
-            app:layout_constraintBottom_toTopOf="@id/item_employee_attendance_management_clock_in_time_title"
+            app:layout_constraintBottom_toTopOf="@id/item_employee_attendance_management_time_title"
             app:layout_constraintStart_toEndOf="@id/item_employee_attendance_management_name" />
 
         <TextView
             android:textSize="12sp"
-            android:id="@+id/item_employee_attendance_management_clock_in_time_title"
+            android:id="@+id/item_employee_attendance_management_time_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/item_employee_attendance_management_time"
@@ -56,31 +56,31 @@
 
         <TextView
             android:textSize="12sp"
-            android:id="@+id/item_employee_attendance_management_clock_in_time"
+            android:id="@+id/item_employee_attendance_management_start_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colorSilver"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/item_employee_attendance_management_clock_in_time_title" />
+            app:layout_constraintStart_toEndOf="@id/item_employee_attendance_management_time_title" />
 
         <TextView
             android:textSize="12sp"
-            android:id="@+id/item_employee_attendance_management_clock_divider"
+            android:id="@+id/item_employee_attendance_management_time_divider"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/item_employee_attendance_management_time_or_date_divider"
             android:textColor="@color/colorSilver"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/item_employee_attendance_management_clock_in_time" />
+            app:layout_constraintStart_toEndOf="@id/item_employee_attendance_management_start_time" />
 
         <TextView
             android:textSize="12sp"
-            android:id="@+id/item_employee_attendance_management_clock_out_time"
+            android:id="@+id/item_employee_attendance_management_end_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colorSilver"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/item_employee_attendance_management_clock_divider"
+            app:layout_constraintStart_toEndOf="@id/item_employee_attendance_management_time_divider"
             app:layout_constraintTop_toBottomOf="@id/item_employee_attendance_management_name" />
 
         <TextView
@@ -92,12 +92,12 @@
             android:text="@string/item_employee_attendance_management_date"
             android:textColor="@color/colorSilver"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/item_employee_attendance_management_clock_out_time"
+            app:layout_constraintStart_toEndOf="@id/item_employee_attendance_management_end_time"
             app:layout_constraintTop_toBottomOf="@id/item_employee_attendance_management_name" />
 
         <TextView
             android:textSize="12sp"
-            android:id="@+id/item_employee_attendance_management_date_start"
+            android:id="@+id/item_employee_attendance_management_start_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colorSilver"
@@ -113,11 +113,11 @@
             android:text="@string/item_employee_attendance_management_time_or_date_divider"
             android:textColor="@color/colorSilver"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/item_employee_attendance_management_date_start" />
+            app:layout_constraintStart_toEndOf="@id/item_employee_attendance_management_start_date" />
 
         <TextView
             android:textSize="12sp"
-            android:id="@+id/item_employee_attendance_management_date_end"
+            android:id="@+id/item_employee_attendance_management_end_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colorSilver"

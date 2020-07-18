@@ -5,18 +5,18 @@ public class EmployeeAttendanceItem {
     private String name;
     private String department;
     private String employeeNumber;
-    private String clockInTime;
-    private String clockOutTime;
+    private String startTime;
+    private String endTime;
     private String startDate;
     private String endDate;
 
 
-    public EmployeeAttendanceItem(String name, String department, String employeeNumber, String clockInTime, String clockOutTime, String startDate, String endDate) {
+    public EmployeeAttendanceItem(String name, String department, String employeeNumber, String startTime, String endTime, String startDate, String endDate) {
         this.name = name;
         this.department = department;
         this.employeeNumber = employeeNumber;
-        this.clockInTime = clockInTime;
-        this.clockOutTime = clockOutTime;
+        this.startTime = startTime;
+        this.endTime = endTime;
         this.startDate = startDate;
         this.endDate = endDate;
     }
@@ -45,20 +45,20 @@ public class EmployeeAttendanceItem {
         this.employeeNumber = employeeNumber;
     }
 
-    public String getClockInTime() {
-        return clockInTime;
+    public String getStartTime() {
+        return startTime;
     }
 
-    public void setClockInTime(String clockInTime) {
-        this.clockInTime = clockInTime;
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
     }
 
-    public String getClockOutTime() {
-        return clockOutTime;
+    public String getEndTime() {
+        return endTime;
     }
 
-    public void setClockOutTime(String clockOutTime) {
-        this.clockOutTime = clockOutTime;
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
     }
 
     public String getStartDate() {

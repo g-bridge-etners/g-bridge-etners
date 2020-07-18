@@ -38,10 +38,26 @@ public abstract class EmployeeAttendanceManagementAdapter extends RecyclerView.A
         EmployeeAttendanceItem mItem = items.get(position);
         holder.tvName.setText(mItem.getName());
         holder.tvEmployeeNumber.setText(mItem.getEmployeeNumber());
-        holder.tvClockInTime.setText(mItem.getClockInTime());
-        holder.tvClockOutTime.setText(mItem.getClockOutTime());
-        holder.tvDateStart.setText(mItem.getStartDate());
-        holder.tvDateEnd.setText(mItem.getEndDate());
+
+        String startTime = mItem.getStartTime();
+        String endTime = mItem.getEndTime();
+        String startDate = mItem.getStartDate();
+        String endDate = mItem.getEndDate();
+
+        if(startTime == null || startTime.isEmpty() || endTime == null || endTime.isEmpty()){
+            holder.tvTimeDivider.setText("미등록");
+        } else {
+            holder.tvStartTime.setText(mItem.getStartTime());
+            holder.tvEndTime.setText(mItem.getEndTime());
+        }
+
+        if(startDate == null || startDate.isEmpty() || endDate == null || endDate.isEmpty()){
+            holder.tvDateDivider.setText("미등록");
+        } else {
+            holder.tvStartDate.setText(mItem.getStartDate());
+            holder.tvEndDate.setText(mItem.getEndDate());
+        }
+
 
         String department = mItem.getDepartment();
 
@@ -81,11 +97,14 @@ public abstract class EmployeeAttendanceManagementAdapter extends RecyclerView.A
         public final TextView tvName;
         public final TextView tvDepartment;
         public final TextView tvEmployeeNumber;
-        public final TextView tvClockInTime;
-        public final TextView tvClockOutTime;
-        public final TextView tvDateStart;
-        public final TextView tvDateEnd;
+        public final TextView tvStartTime;
+        public final TextView tvEndTime;
+        public final TextView tvStartDate;
+        public final TextView tvEndDate;
         public final Button btnOptions;
+
+        public final TextView tvTimeDivider;
+        public final TextView tvDateDivider;
 
 
         public ViewHolder(View view) {
@@ -93,11 +112,14 @@ public abstract class EmployeeAttendanceManagementAdapter extends RecyclerView.A
             tvName = view.findViewById(R.id.item_employee_attendance_management_name);
             tvDepartment = view.findViewById(R.id.item_employee_attendance_management_department);
             tvEmployeeNumber = view.findViewById(R.id.item_employee_attendance_management_employee_number);
-            tvClockInTime = view.findViewById(R.id.item_employee_attendance_management_clock_in_time);
-            tvClockOutTime = view.findViewById(R.id.item_employee_attendance_management_clock_out_time);
-            tvDateStart = view.findViewById(R.id.item_employee_attendance_management_date_start);
-            tvDateEnd = view.findViewById(R.id.item_employee_attendance_management_date_end);
+            tvStartTime = view.findViewById(R.id.item_employee_attendance_management_start_time);
+            tvEndTime = view.findViewById(R.id.item_employee_attendance_management_end_time);
+            tvStartDate = view.findViewById(R.id.item_employee_attendance_management_start_date);
+            tvEndDate = view.findViewById(R.id.item_employee_attendance_management_end_date);
             btnOptions = view.findViewById(R.id.btn_employee_attendance_management_options);
+
+            tvTimeDivider = view.findViewById(R.id.item_employee_attendance_management_time_divider);
+            tvDateDivider = view.findViewById(R.id.item_employee_attendance_management_date_divider);
         }
     }
 
