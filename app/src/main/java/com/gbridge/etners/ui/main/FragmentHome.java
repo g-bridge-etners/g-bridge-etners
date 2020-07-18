@@ -1,6 +1,7 @@
 package com.gbridge.etners.ui.main;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,9 +18,7 @@ import androidx.fragment.app.Fragment;
 
 import com.gbridge.etners.R;
 import com.gbridge.etners.util.GpsReceiver;
-import com.gbridge.etners.util.WifiReceiver;
-
-import org.json.JSONArray;
+import com.gbridge.etners.util.WifiUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -85,13 +84,18 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
     }
 
     private void checkWifiState(View view) {
-        new WifiReceiver(view.getContext()) {
-            @NonNull
-            @Override
-            protected void onReceive(JSONArray aps) {
+        String wifiAp = WifiUtil.getAp(view.getContext());
 
-            }
-        };
+        if(wifiAp != null) {
+            isWifiConnected = true;
+            wifiState.setImageResource(R.drawable.ic_wifi);
+            wifiState.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorAccent)));
+        }
+        else {
+            isWifiConnected = false;
+            wifiState.setImageResource(R.drawable.ic_wifi_off);
+            wifiState.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorGray)));
+        }
     }
 
     private void checkGpsState(View view) {
