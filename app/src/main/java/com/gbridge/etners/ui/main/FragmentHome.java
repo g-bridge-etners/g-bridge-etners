@@ -15,6 +15,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.gbridge.etners.R;
+import com.gbridge.etners.util.GpsReceiver;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class FragmentHome extends Fragment implements View.OnClickListener {
     Context context;
@@ -40,6 +44,8 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
         checkButton = view.findViewById(R.id.home_checkButton);
         checkButton.setOnClickListener(this);
 
+        setDateView();
+
         return view;
     }
 
@@ -52,6 +58,28 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
             case R.id.home_checkButton:
                 Toast.makeText(context, "출퇴근 버튼", Toast.LENGTH_SHORT).show();
                 break;
+        }
+    }
+
+    private void setDateView() {
+        long currentTime = System.currentTimeMillis();
+        Date mDate = new Date(currentTime);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy년 MM월 dd일");
+        String stringDate = simpleDateFormat.format(mDate);
+        date.setText(stringDate);
+    }
+
+    private void checkNetworkState(View view) {
+        new GpsReceiver(view.getContext()) {
+            @NonNull
+            @Override
+            protected void onReceive(Double latitude, Double longitude) {
+                if(latitude != null && longitude != null){
+
+                } else {
+
+                }
+            }
         }
     }
 }
