@@ -92,19 +92,33 @@ public class EmployeeAttendanceManagementFragment extends BaseFragment {
                             Log.d(TAG, "onMenuItemClick: RUN");
 
 
-                            EmployeeAttendanceManagementDialog dialog = new EmployeeAttendanceManagementDialog(getActivity()) {
+                            EmployeeAttendanceManagementItem serverItem = null;
+                            /*******************************************************************************
+
+
+                                  TODO: 서버에서 EmployeeAttenDanceManagementItem 불러와야 함
+
+                              if(true){ // 서버에 저장된 데이터 있는 경우
+                                serverItem = [서버데이터]
+                              }
+
+                             서버에 저장된 데이터 없는 경우 null 유지
+                             null인 경우 - dialog 빈페이지, 값이 있는 경우 - dialog 채워줌
+                             *******************************************************************************/
+
+                            EmployeeAttendanceManagementDialog dialog = new EmployeeAttendanceManagementDialog(getActivity(), serverItem) {
                                 @Override
                                 public void onPositiveClicked(EmployeeAttendanceManagementItem item) {
-                                    holder.tvClockInTime.setText(item.getStartTime());
-                                    holder.tvClockOutTime.setText(item.getEndTime());
-                                    holder.tvDateStart.setText(item.getStartDate());
-                                    holder.tvDateEnd.setText(item.getEndDate());
+                                    holder.tvStartTime.setText(item.getStartTime());
+                                    holder.tvEndTime.setText(item.getEndTime());
+                                    holder.tvStartDate.setText(item.getStartDate());
+                                    holder.tvEndDate.setText(item.getEndDate());
 
-                                    /*
+                                    /*******************************************************************************
 
-                                        TODO: EmployeeAttenDanceManagementItem 서버에 전송 필요 (REST API 개발중)
+                                        TODO: EmployeeAttenDanceManagementItem item 서버에 전송 필요 (REST API 개발중)
 
-                                     */
+                                     *******************************************************************************/
                                 }
 
                                 @Override
@@ -136,16 +150,16 @@ public class EmployeeAttendanceManagementFragment extends BaseFragment {
         return super.onOptionsItemSelected(item);
     }
 
-    /*
+    /*******************************************************************************
 
      TODO: 서버에서 데이터 불러오는 작업 필요 (REST API 개발중)
 
-     */
+     ******************************************************************************/
     private List<EmployeeAttendanceItem> getTestData() {
         ArrayList<EmployeeAttendanceItem> list = new ArrayList<>();
 
         list.add(new EmployeeAttendanceItem("김태호",
-                "개발팀", "201739413", "09:00", "17:00", "20-08-20", "22-09-30"));
+                "개발팀", "201739413", "", "", null, null));
         list.add(new EmployeeAttendanceItem("정영훈",
                 "개발팀", "201000000", "09:00", "17:00","20-08-20", "22-09-30"));
         list.add(new EmployeeAttendanceItem("천재웅",
