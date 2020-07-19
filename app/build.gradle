@@ -47,4 +47,6 @@ dependencies {
     implementation('com.github.gzu-liyujiang.AndroidPicker:WheelPicker:1.5.6') {
         exclude group: 'com.android.support'
     }
+
+    implementation 'com.github.Jay-Goo:RangeSeekBar:v3.0.0'
 }

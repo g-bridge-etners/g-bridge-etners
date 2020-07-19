@@ -92,7 +92,7 @@ public abstract class EmployeeAttendanceManagementAdapter extends RecyclerView.A
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
         public final TextView tvName;
         public final TextView tvDepartment;
