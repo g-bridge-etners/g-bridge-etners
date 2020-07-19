@@ -1,4 +1,4 @@
-package com.gbridge.etners.util.retrofit;
+package com.gbridge.etners.util.retrofit.register;
 
 import retrofit2.Call;
 import retrofit2.http.Body;

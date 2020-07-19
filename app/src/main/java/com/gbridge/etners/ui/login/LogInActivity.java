@@ -97,10 +97,10 @@ public class LogInActivity extends BaseActivity implements LogInActivityView {
             editor.commit();
             Intent resultIntent = new Intent(this, MainActivity.class);
             resultIntent.putExtra("id", mEtId.getText().toString());
-            resultIntent.putExtra("token",X_ACCESS_TOKEN);
+            resultIntent.putExtra("token",token);
             setResult(1, resultIntent);
             startActivity(resultIntent);
-            showCustomToast(mEtId.getText().toString() + "로그인성공");
+            //showCustomToast(mEtId.getText().toString() + "로그인성공");
         }else{
             showCustomToast(message);
         }

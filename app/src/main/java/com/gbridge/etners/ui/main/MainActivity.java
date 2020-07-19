@@ -13,17 +13,16 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.FrameLayout;
 
 import com.gbridge.etners.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
-    private FragmentManager fragmentManager = getSupportFragmentManager();
-    private FragmentHome fragmentHome = new FragmentHome();
-    private FragmentList fragmentList = new FragmentList();
-    private FragmentCalendar fragmentCalendar = new FragmentCalendar();
+    private FragmentManager fragmentManager;
+    private FragmentHome fragmentHome;
+    private FragmentList fragmentList;
+    private FragmentCalendar fragmentCalendar;
 
     private FrameLayout frame;
     private BottomNavigationView bnav;
@@ -37,6 +36,11 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
         Intent intent = getIntent();
         token = intent.getStringExtra("token");
+
+        fragmentManager = getSupportFragmentManager();
+        fragmentHome = new FragmentHome(this, this, token);
+        fragmentList = new FragmentList();
+        fragmentCalendar = new FragmentCalendar();
 
         checkPermission();
 

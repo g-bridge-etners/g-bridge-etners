@@ -14,9 +14,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.gbridge.etners.R;
-import com.gbridge.etners.util.retrofit.RegisterAPI;
-import com.gbridge.etners.util.retrofit.RegisterRequest;
-import com.gbridge.etners.util.retrofit.RegisterResponse;
+import com.gbridge.etners.util.retrofit.register.RegisterAPI;
+import com.gbridge.etners.util.retrofit.register.RegisterRequest;
+import com.gbridge.etners.util.retrofit.register.RegisterResponse;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -103,27 +103,27 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onResponse(Call<RegisterResponse> call, Response<RegisterResponse> response) {
                 if(response.code() == 201) {
-                    Log.d("Test", "회원가입 성공.");
+                    Log.d("SignUpActivity", "회원가입 성공.");
                     signupSuccess();
                 }
                 else if(response.code() == 400) {
-                    Log.d("Test", "잘못된 회원정보입니다.");
+                    Log.d("SignUpActivity", "잘못된 회원정보입니다.");
                     signupFail(response.body().getMessage());
                 }
                 else if(response.code() == 409) {
-                    Log.d("Test", "이미 존재하는 사원번호입니다.");
+                    Log.d("SignUpActivity", "이미 존재하는 사원번호입니다.");
                     signupFail(response.body().getMessage());
                 }
                 else if(response.code() == 415) {
-                    Log.d("Test", "잘못된 요청타입입니다.");
+                    Log.d("SignUpActivity", "잘못된 요청타입입니다.");
                     signupFail(response.body().getMessage());
                 }
                 else if(response.code() == 500) {
-                    Log.d("Test", "서버에 오류가 발생했습니다.");
+                    Log.d("SignUpActivity", "서버에 오류가 발생했습니다.");
                     signupFail(response.body().getMessage());
                 }
                 else {
-                    Log.d("Test", "알수 없는 오류입니다.");
+                    Log.d("SignUpActivity", "알수 없는 오류입니다.");
                     signupFail(response.body().getMessage());
                 }
             }
