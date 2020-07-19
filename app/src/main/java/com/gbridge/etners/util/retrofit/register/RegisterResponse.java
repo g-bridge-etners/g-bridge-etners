@@ -1,4 +1,4 @@
-package com.gbridge.etners.util.retrofit;
+package com.gbridge.etners.util.retrofit.register;
 
 public class RegisterResponse {
     private String message;
