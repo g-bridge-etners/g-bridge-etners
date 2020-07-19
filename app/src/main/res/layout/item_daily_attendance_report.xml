@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:rsb="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/admin_layout_horizontal_padding"
+        android:paddingVertical="8dp">
+
+
+
+        <TextView
+            android:id="@+id/tv_daily_attendance_report_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="김태호"
+            android:textColor="@color/colorSoftblack"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/tv_daily_attendance_report_department"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="8dp"
+            android:text="개발팀"
+            android:textColor="@color/colorGray"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@id/tv_daily_attendance_report_name"
+            app:layout_constraintBottom_toBottomOf="@id/tv_daily_attendance_report_name" />
+
+        <TextView
+            android:id="@+id/tv_daily_attendance_report_employee_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="201739413"
+            android:textColor="@color/colorSilver"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@id/tv_daily_attendance_report_name"
+            app:layout_constraintStart_toEndOf="@id/tv_daily_attendance_report_department" />
+
+        <TextView
+            android:id="@+id/tv_daily_attendance_report_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="3dp"
+            android:paddingVertical="1dp"
+            android:text="근무중"
+            android:textColor="?android:attr/windowBackground"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.jaygoo.widget.RangeSeekBar
+            android:id="@+id/seek_bar_item_daily_attendance_report"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_daily_attendance_report_name"
+            app:rsb_progress_height="4dp"
+            app:rsb_gravity="center"
+            app:rsb_indicator_background_color="@color/colorTransparent"
+            app:rsb_indicator_show_mode="alwaysShow"
+            app:rsb_indicator_text_color="@color/colorPrimary"
+            app:rsb_max="100"
+            app:rsb_min="0"
+            app:rsb_mode="range"
+            app:rsb_progress_color="@color/colorLightPrimary"
+            app:rsb_thumb_drawable="@drawable/ic_circle"
+            app:rsb_thumb_height="20dp"
+            app:rsb_thumb_width="20dp"
+            app:rsb_tick_mark_gravity="center"
+            app:rsb_tick_mark_layout_gravity="bottom"
+            app:rsb_tick_mark_mode="other"
+            app:rsb_tick_mark_text_color="@color/colorGray"
+            app:rsb_tick_mark_text_margin="12dp"
+            app:rsb_tick_mark_text_size="14sp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

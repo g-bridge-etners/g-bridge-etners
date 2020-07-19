@@ -16,7 +16,6 @@
             android:id="@+id/item_employee_attendance_management_department"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_round_primary_view"
             android:paddingHorizontal="3dp"
             android:paddingVertical="1dp"
             android:textColor="@color/colorWhiteSmoke"
