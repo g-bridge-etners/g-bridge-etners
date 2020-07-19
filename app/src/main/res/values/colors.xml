@@ -16,4 +16,5 @@
 
     <color name="colorBalck">#000000</color>
     <color name="colorDefault">#ECECEC</color>
+    <color name="colorTransparent">#0000</color>
 </resources>
