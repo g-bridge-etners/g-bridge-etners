@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
-        app:title="@string/login"
+        app:title="@string/login_title"
         app:titleTextAppearance="@style/ActionBar.nameText"
         android:elevation="2dp"/>
 
@@ -23,14 +23,14 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/id"
+        android:text="@string/login_id"
         android:textSize="15sp"
         android:layout_marginStart="30dp"/>
     <EditText
         android:id="@+id/login_et_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/id_hint"
+        android:hint="@string/login_id_hint"
         android:inputType="number"
         android:maxLines="1"
         android:background="@drawable/border_empty"
@@ -50,14 +50,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/pw"
+            android:text="@string/login_pw"
             android:textSize="15sp"
             android:layout_marginStart="30dp"/>
         <EditText
             android:id="@+id/login_et_pw"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/pw_hint"
+            android:hint="@string/login_pw_hint"
             android:background="@drawable/border_empty"
             android:maxLines="1"
             android:inputType="textPassword"
@@ -73,7 +73,7 @@
         android:id="@+id/login_tv_login_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/login"
+        android:text="@string/login_title"
         android:textSize="20sp"
         android:textColor="@color/colorWhite"
         android:paddingTop="15dp"
@@ -89,9 +89,14 @@
         android:id="@+id/login_signupButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_button"
+        android:background="@drawable/btn_login_background"
         android:text="@string/signup_buttonText"
         android:textColor="@color/colorWhite"
+        android:textSize="20sp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
         android:layout_marginTop="16dp"
         android:onClick="customOnClick"/>
 

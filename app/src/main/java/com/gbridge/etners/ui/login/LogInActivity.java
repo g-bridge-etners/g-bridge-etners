@@ -71,7 +71,6 @@ public class LogInActivity extends BaseActivity implements LogInActivityView {
 
     private void tryPostLogIn(){
         showProgressDialog();
-        //logInService.postLogIn("200000000","000000");
         logInService.postLogIn(id,pw);
     }
 

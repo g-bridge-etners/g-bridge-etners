@@ -11,6 +11,7 @@
     <color name="colorGainsboro">#e8e8e8</color>
     <color name="colorWhiteSmoke">#f5f5f5</color>
     <color name="colorWhite">#ffffff</color>
-    <color name="colorBalck">#000000</color>
+    <color name="colorBlack">#000000</color>
     <color name="colorDefault">#ECECEC</color>
+    <color name="colorDivider">#EDD1D0D0</color>
 </resources>
