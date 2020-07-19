@@ -65,7 +65,7 @@ public abstract class EmployeeAttendanceManagementDialog extends Dialog implemen
         btnSubmit.setOnClickListener(this);
         btnCancle.setOnClickListener(this);
 
-        if(item != null){
+        if (item != null) {
             edtTitle.setText(item.getTitle());
             edtDescription.setText(item.getDescription());
             edtStartDate.setText(item.getStartDate());
@@ -83,7 +83,7 @@ public abstract class EmployeeAttendanceManagementDialog extends Dialog implemen
                 new myDatePicker() {
                     @Override
                     protected void onDatePickedExternal(String year, String month, String day) {
-                        edtStartDate.setText(year.substring(2) + "-" + month + "-" + day);
+                        edtStartDate.setText(String.format("%s-%s-%s", year.substring(2), month, day));
                     }
                 };
                 break;
@@ -91,7 +91,7 @@ public abstract class EmployeeAttendanceManagementDialog extends Dialog implemen
                 new myDatePicker() {
                     @Override
                     protected void onDatePickedExternal(String year, String month, String day) {
-                        edtEndDate.setText(year.substring(2) + "-" + month + "-" + day);
+                        edtEndDate.setText(String.format("%s-%s-%s", year.substring(2), month, day));
                     }
                 };
                 break;
@@ -99,7 +99,7 @@ public abstract class EmployeeAttendanceManagementDialog extends Dialog implemen
                 new myTimePicker() {
                     @Override
                     protected void onTimePickedExternal(String hour, String minute) {
-                        edtStartTime.setText(hour + ":" + minute);
+                        edtStartTime.setText(String.format("%s:%s", hour, minute));
                     }
                 };
                 break;
@@ -107,7 +107,7 @@ public abstract class EmployeeAttendanceManagementDialog extends Dialog implemen
                 new myTimePicker() {
                     @Override
                     protected void onTimePickedExternal(String hour, String minute) {
-                        edtEndTime.setText(hour + ":" + minute);
+                        edtEndTime.setText(String.format("%s:%s", hour, minute));
                     }
                 };
                 break;
@@ -119,7 +119,7 @@ public abstract class EmployeeAttendanceManagementDialog extends Dialog implemen
                 String startTime = edtStartTime.getText().toString();
                 String endTime = edtEndTime.getText().toString();
 
-                if(title.isEmpty()||description.isEmpty()||startDate.isEmpty()||endDate.isEmpty()||startTime.isEmpty()||endTime.isEmpty()){
+                if (title.isEmpty() || description.isEmpty() || startDate.isEmpty() || endDate.isEmpty() || startTime.isEmpty() || endTime.isEmpty()) {
                     Toast.makeText(activity, "모든 항목을 빠짐없이 입력해주세요.", Toast.LENGTH_SHORT).show();
                 } else {
                     item = new EmployeeAttendanceManagementItem(
@@ -149,14 +149,10 @@ public abstract class EmployeeAttendanceManagementDialog extends Dialog implemen
 
     private abstract class myDatePicker {
         public myDatePicker() {
-            Date currentTime = Calendar.getInstance().getTime();
-            SimpleDateFormat dayFormat = new SimpleDateFormat("dd", Locale.KOREA);
-            SimpleDateFormat monthFormat = new SimpleDateFormat("MM", Locale.KOREA);
-            SimpleDateFormat yearFormat = new SimpleDateFormat("yyyy", Locale.KOREA);
-
-            String year = yearFormat.format(currentTime);
-            String month = monthFormat.format(currentTime);
-            String day = dayFormat.format(currentTime);
+            Calendar calendar = Calendar.getInstance(Locale.KOREA);
+            int currentYear = calendar.get(Calendar.YEAR);
+            int currentMonth = calendar.get(Calendar.MONTH) + 1;
+            int currentDay = calendar.get(Calendar.DAY_OF_MONTH);
 
             final cn.qqtheme.framework.picker.DatePicker picker = new cn.qqtheme.framework.picker.DatePicker(activity);
             picker.setTopLineHeight(0);
@@ -171,7 +167,7 @@ public abstract class EmployeeAttendanceManagementDialog extends Dialog implemen
             picker.setTopPadding(ConvertUtils.toPx(getContext(), 10));
             picker.setRangeEnd(2040, 12, 31);
             picker.setRangeStart(2000, 1, 1);
-            picker.setSelectedItem(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day));
+            picker.setSelectedItem(currentYear, currentMonth, currentDay);
             picker.setResetWhileWheel(false);
             picker.setOnDatePickListener(new cn.qqtheme.framework.picker.DatePicker.OnYearMonthDayPickListener() {
                 @Override
