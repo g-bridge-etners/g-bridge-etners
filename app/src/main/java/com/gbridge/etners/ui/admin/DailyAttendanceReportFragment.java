@@ -152,13 +152,13 @@ public class DailyAttendanceReportFragment extends Fragment {
         ArrayList<DailyAttendanceReportItem> list = new ArrayList<>();
 
         list.add(new DailyAttendanceReportItem("김태호",
-                "개발팀", "201739413", "퇴근완료", "09:00", "17:00", "09:00", "18:00"));
+                "개발팀", "201739413", "비정상", "09:00", "17:00", "10:00", "16:00"));
         list.add(new DailyAttendanceReportItem("정영훈",
                 "개발팀", "201000000", "근무중", "09:00", "17:00", "09:00", null));
         list.add(new DailyAttendanceReportItem("천재웅",
-                "개발팀", "201000000", "퇴근완료", "10:00", null, "09:00", "18:00"));
+                "개발팀", "201000000", null, "10:00", null, "09:00", "18:00"));
         list.add(new DailyAttendanceReportItem("최다빈",
-                "개발팀", "201000000", "퇴근완료", "11:00", "17:00", "12:00", "16:00"));
+                "개발팀", "201000000", "완료", "11:00", "17:00", "11:00", "17:00"));
         list.add(new DailyAttendanceReportItem("김수현",
                 "기획팀", "201739433", "퇴근완료", "09:00", "17:00", "09:00", "18:00"));
         list.add(new DailyAttendanceReportItem("서예지",

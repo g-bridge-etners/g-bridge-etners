@@ -1,9 +1,7 @@
 package com.gbridge.etners.ui.admin.adapter;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,14 +15,14 @@ import com.jaygoo.widget.RangeSeekBar;
 import com.jaygoo.widget.SeekBar;
 
 
-import java.sql.Array;
-import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.TimeZone;
 
 
 public class DailyAttendanceReportAdapter extends RecyclerView.Adapter<DailyAttendanceReportAdapter.ViewHolder> {
@@ -62,24 +60,25 @@ public class DailyAttendanceReportAdapter extends RecyclerView.Adapter<DailyAtte
         /*******************************************************************************
 
          TODO: 작업2 : 근무상태 목록 정하고 변경 필요
-
+         아래는 임시, 색상도 변경 필요
          ******************************************************************************/
         String status = mItem.getStatus();
-        switch (status) {
-            case "출근":
-                holder.tvStatus.setBackgroundResource(R.drawable.bg_round_a39ef1_view);
-                break;
-            case "퇴근":
-                holder.tvStatus.setBackgroundResource(R.drawable.bg_round_00c8ff_view);
-                break;
-            case "근무":
-                holder.tvStatus.setBackgroundResource(R.drawable.bg_round_8dc100_view);
-                break;
-            default:
-                holder.tvStatus.setBackgroundResource(R.drawable.bg_round_000181_view);
+        if (status == null) {
+            holder.tvStatus.setBackgroundResource(R.drawable.bg_round_invisible_view);
+            status = "";
+        } else if (status.equals("비정상")) {
+            holder.tvStatus.setBackgroundResource(R.drawable.bg_round_ed2939_view);
+        } else if (status.equals("퇴근완료")) {
+            holder.tvStatus.setBackgroundResource(R.drawable.bg_round_00c8ff_view);
+        } else if (status.equals("근무중")) {
+            holder.tvStatus.setBackgroundResource(R.drawable.bg_round_000181_view);
+        } else if (status.equals("완료")) {
+            holder.tvStatus.setBackgroundResource(R.drawable.bg_round_darkgray_view);
+        } else {
+            holder.tvStatus.setBackgroundResource(R.drawable.bg_round_invisible_view);
+            status = "";
         }
         holder.tvStatus.setText(status);
-
 
 
         RangeSeekBar rangeSeekBar = holder.rangeSeekBar;
@@ -125,9 +124,16 @@ public class DailyAttendanceReportAdapter extends RecyclerView.Adapter<DailyAtte
 
         } else if (clockOutTIme == null || clockOutTIme.isEmpty()) {
             SeekBar rightSeekbar = rangeSeekBar.getRightSeekBar();
-            rightSeekbar.setThumbDrawableId(R.drawable.ic_circle_invisible);
             rightSeekbar.setIndicatorTextColor(Color.TRANSPARENT);
-            rangeSeekBar.setProgress(0,0);
+
+            float leftSeekBarPercent = percentageCaculator(startTime, endTime, clockInTime);
+
+            SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm", Locale.KOREA);
+            timeFormat.setTimeZone(TimeZone.getTimeZone("Asia/Seoul"));
+            String currentTime = timeFormat.format(new Date(System.currentTimeMillis()));
+            float rightSeekbarPercent = percentageCaculator(startTime, endTime, currentTime);
+
+            rangeSeekBar.setProgress(leftSeekBarPercent, rightSeekbarPercent);
             rangeSeekBar.getLeftSeekBar().setIndicatorText(mItem.getClockInTime() + " 출근");
         } else {
             float leftSeekBarPercent = 0;
@@ -160,7 +166,30 @@ public class DailyAttendanceReportAdapter extends RecyclerView.Adapter<DailyAtte
             rangeSeekBar.getRightSeekBar().setIndicatorText(mItem.getClockOutTime() + " 퇴근");
         }
 
+    }
 
+    private float percentageCaculator(String startTime, String endTime, String targetTime) {
+        long longStartTime = 0;
+        long longEndTime = 0;
+        long longTargetTime = 0;
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm", Locale.KOREA);
+        try {
+            longStartTime = timeFormat.parse(startTime).getTime();
+            longEndTime = timeFormat.parse(endTime).getTime();
+            longTargetTime = timeFormat.parse(targetTime).getTime();
+        } catch (ParseException | NullPointerException e) {
+            e.printStackTrace();
+        }
+        long total = longEndTime - longStartTime;
+        long target = longTargetTime - longStartTime;
+        float percent = target * 100f / total;
+        if (percent < 0f) {
+            return 0f;
+        } else if (percent > 100f) {
+            return 100f;
+        } else {
+            return percent;
+        }
     }
 
     public void changeItems(List<DailyAttendanceReportItem> items) {
