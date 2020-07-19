@@ -3,9 +3,17 @@ package com.gbridge.etners.util.retrofit.commute;
 public class CommuteRequest {
     private String method;
     private String type;
-    private String latitude;
-    private String longitude;
+    private Double latitude;
+    private Double longitude;
     private String ap;
+
+    public CommuteRequest(String method, String type, Double latitude, Double longitude, String ap) {
+        this.method = method;
+        this.type = type;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.ap = ap;
+    }
 
     public String getMethod() {
         return method;
@@ -23,19 +31,19 @@ public class CommuteRequest {
         this.type = type;
     }
 
-    public String getLatitude() {
+    public Double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(String latitude) {
+    public void setLatitude(Double latitude) {
         this.latitude = latitude;
     }
 
-    public String getLongitude() {
+    public Double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(String longitude) {
+    public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
 
