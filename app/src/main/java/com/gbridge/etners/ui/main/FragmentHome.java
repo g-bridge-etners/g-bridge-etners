@@ -71,8 +71,9 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
         checkButton.setOnClickListener(this);
 
         setDateView();
-        checkGpsState(view);
         checkCommuteState();
+        checkGpsState(view);
+
 
         return view;
     }
