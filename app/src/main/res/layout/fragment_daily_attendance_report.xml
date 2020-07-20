@@ -39,7 +39,8 @@
                 android:paddingTop="16dp"
                 android:paddingBottom="4dp"
                 android:text="2020년 7월 16일"
-                app:layout_constraintTop_toBottomOf="@id/calendar_view_daily_attendance_report" />
+                app:layout_constraintTop_toBottomOf="@id/calendar_view_daily_attendance_report"
+                app:layout_constraintStart_toStartOf="parent"/>
 
             <View
                 android:layout_width="match_parent"
@@ -54,8 +55,50 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_daily_attendance_report_date"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <com.hmomeni.progresscircula.ProgressCircula
+                android:layout_marginTop="15dp"
+                android:id="@+id/progress_circular_daily_attendance_report"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                app:pgc_indeterminate="true"
+                app:pgc_progress="40"
+                app:pgc_rimColor="@color/colorAccent"
+                app:pgc_rimWidth="3dp"
+                app:pgc_showProgress="true"
+                app:pgc_speed="3"
+                app:layout_constraintTop_toBottomOf="@id/recycler_view_daily_attendance_report"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/container_empty_data_daily_attendance_report"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/recycler_view_daily_attendance_report"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:orientation="vertical">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorGainsboro"/>
+
+                <TextView
+                    android:paddingVertical="20dp"
+                    android:paddingHorizontal="@dimen/admin_layout_horizontal_padding"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/item_empty_data"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorGainsboro"/>
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

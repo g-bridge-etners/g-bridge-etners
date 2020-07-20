@@ -57,6 +57,7 @@
     <string name="item_employee_attendance_management_date">근무기간 : </string>
     <string name="item_employee_attendance_management_time_or_date_divider">~</string>
 
+    <string name="item_empty_data">서버에 등록된 정보가 없습니다.</string>
 
     <string name="hello_blank_fragment">임시</string>
 </resources>

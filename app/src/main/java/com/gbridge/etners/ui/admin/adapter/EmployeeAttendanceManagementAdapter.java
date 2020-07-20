@@ -9,19 +9,26 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.gbridge.etners.R;
+import com.gbridge.etners.data.DailyAttendanceReportItem;
 import com.gbridge.etners.data.EmployeeAttendanceItem;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 public abstract class EmployeeAttendanceManagementAdapter extends RecyclerView.Adapter<EmployeeAttendanceManagementAdapter.ViewHolder> {
 
 
-    private final List<EmployeeAttendanceItem> items;
+    private List<EmployeeAttendanceItem> items;
 
+
+    public EmployeeAttendanceManagementAdapter() {
+        items = new ArrayList<>();
+    }
 
     public EmployeeAttendanceManagementAdapter(List<EmployeeAttendanceItem> items) {
-        this.items = items;
+        this.items = new ArrayList<>();
+        this.items.addAll(items);
     }
 
 
@@ -39,52 +46,68 @@ public abstract class EmployeeAttendanceManagementAdapter extends RecyclerView.A
         holder.tvName.setText(mItem.getName());
         holder.tvEmployeeNumber.setText(mItem.getEmployeeNumber());
 
-        String startTime = mItem.getStartTime();
-        String endTime = mItem.getEndTime();
-        String startDate = mItem.getStartDate();
-        String endDate = mItem.getEndDate();
-
-        if(startTime == null || startTime.isEmpty() || endTime == null || endTime.isEmpty()){
-            holder.tvTimeDivider.setText("미등록");
-        } else {
-            holder.tvStartTime.setText(mItem.getStartTime());
-            holder.tvEndTime.setText(mItem.getEndTime());
-        }
-
-        if(startDate == null || startDate.isEmpty() || endDate == null || endDate.isEmpty()){
-            holder.tvDateDivider.setText("미등록");
-        } else {
-            holder.tvStartDate.setText(mItem.getStartDate());
-            holder.tvEndDate.setText(mItem.getEndDate());
-        }
 
 
         String department = mItem.getDepartment();
 
-        // TODO: 부서 목록 정해지면 목록에 맞게수정 필요
-        switch (department) {
-            case "개발팀":
-                holder.tvDepartment.setBackgroundResource(R.drawable.bg_round_a39ef1_view);
-                break;
-            case "기획팀":
-                holder.tvDepartment.setBackgroundResource(R.drawable.bg_round_00c8ff_view);
-                break;
-            case "경영팀":
-                holder.tvDepartment.setBackgroundResource(R.drawable.bg_round_8dc100_view);
-                break;
-            default:
-                holder.tvDepartment.setBackgroundResource(R.drawable.bg_round_primary_view);
-        }
+       if(department == null){
+           holder.tvDepartment.setBackgroundResource(R.drawable.bg_round_darkgray_view);
+           department = "미등록";
+       } else if (department.equals("개발팀")){
+           holder.tvDepartment.setBackgroundResource(R.drawable.bg_round_primary_view);
+       } else if (department.equals("기획팀")){
+           holder.tvDepartment.setBackgroundResource(R.drawable.bg_round_8dc100_view);
+       } else if (department.equals("경영팀")){
+           holder.tvDepartment.setBackgroundResource(R.drawable.bg_round_00c8ff_view);
+       } else if (department.equals("디자인팀")){
+           holder.tvDepartment.setBackgroundResource(R.drawable.bg_round_a39ef1_view);
+       } else {
+           holder.tvDepartment.setBackgroundResource(R.drawable.bg_round_ed2939_view);
+       }
+
         holder.tvDepartment.setText(department);
 
         holder.btnOptions.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onOptionClick(holder);
+                onOptionClick(holder, items.get(position));
             }
         });
+
+        String startTime = mItem.getStartTime();
+        String endTime = mItem.getEndTime();
+        String startDate = mItem.getStartDate();
+        String endDate = mItem.getEndDate();
+
+        if (startTime == null || startTime.isEmpty() || endTime == null || endTime.isEmpty()) {
+            holder.tvTimeDivider.setText("미등록");
+            holder.tvStartTime.setText("");
+            holder.tvEndTime.setText("");
+        } else {
+            holder.tvTimeDivider.setText("~");
+            holder.tvStartTime.setText(startTime);
+            holder.tvEndTime.setText(endTime);
+        }
+
+        if (startDate == null || startDate.isEmpty() || endDate == null || endDate.isEmpty()) {
+            holder.tvDateDivider.setText("미등록");
+            holder.tvStartDate.setText("");
+            holder.tvEndDate.setText("");
+        } else {
+            holder.tvDateDivider.setText("~");
+            holder.tvStartDate.setText(startDate);
+            holder.tvEndDate.setText(endDate);
+        }
+
     }
 
+    public void changeItems(List<EmployeeAttendanceItem> items) {
+        if (this.items != null) {
+            this.items.clear();
+        }
+        this.items.addAll(items);
+        notifyDataSetChanged();
+    }
 
     @Override
     public int getItemCount() {
@@ -123,5 +146,5 @@ public abstract class EmployeeAttendanceManagementAdapter extends RecyclerView.A
         }
     }
 
-    protected abstract void onOptionClick(ViewHolder holder);
+    protected abstract void onOptionClick(ViewHolder holder, EmployeeAttendanceItem item);
 }

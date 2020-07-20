@@ -1,5 +1,6 @@
 package com.gbridge.etners.ui.admin;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -12,16 +13,19 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.gbridge.etners.BaseActivity;
 import com.gbridge.etners.R;
 import com.gbridge.etners.ui.main.FragmentCalendar;
 import com.gbridge.etners.ui.main.FragmentHome;
 import com.gbridge.etners.ui.main.FragmentList;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class AdminActivity extends AppCompatActivity {
+import static com.gbridge.etners.ApplicationClass.X_ACCESS_TOKEN;
+
+public class AdminActivity extends BaseActivity {
 
     private FragmentManager fragmentManager = getSupportFragmentManager();
-
+    private String token;
 
 
     @Override
@@ -34,9 +38,10 @@ public class AdminActivity extends AppCompatActivity {
 
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.container_admin, AdminHomeFragment.newInstance()).commitAllowingStateLoss();
+
+        SharedPreferences sharedPreferences = getSharedPreferences("key", MODE_PRIVATE);
+        token = sharedPreferences.getString(X_ACCESS_TOKEN, "none");
     }
-
-
 
 
     public void removeAndPop(Fragment fragment) {
@@ -45,7 +50,6 @@ public class AdminActivity extends AppCompatActivity {
         fragmentManager.beginTransaction().remove(fragment).commit();
         Log.d("test", Integer.toString(fragmentManager.getFragments().size()));
     }
-
 
 
     public void replaceWithBackStack(Fragment fragment) {
@@ -57,6 +61,9 @@ public class AdminActivity extends AppCompatActivity {
                 .commit();
     }
 
+    public String getToken() {
+        return token;
+    }
 
 
 }

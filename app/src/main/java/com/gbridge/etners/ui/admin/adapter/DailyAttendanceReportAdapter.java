@@ -19,6 +19,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -27,8 +28,9 @@ import java.util.TimeZone;
 
 public class DailyAttendanceReportAdapter extends RecyclerView.Adapter<DailyAttendanceReportAdapter.ViewHolder> {
 
-
+    String date;
     private List<DailyAttendanceReportItem> items;
+    private boolean isToday = false;
 
     public DailyAttendanceReportAdapter() {
         this.items = new ArrayList<>();
@@ -39,6 +41,9 @@ public class DailyAttendanceReportAdapter extends RecyclerView.Adapter<DailyAtte
         this.items.addAll(items);
     }
 
+    public void setDate(String date) {
+        this.date = date;
+    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -51,38 +56,32 @@ public class DailyAttendanceReportAdapter extends RecyclerView.Adapter<DailyAtte
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         DailyAttendanceReportItem mItem = items.get(position);
+        try {
+            Log.d("name", mItem.getName());
+            Log.d("clockin", mItem.getClockInTime());
+            Log.d("clockout", mItem.getClockOutTime());
+        } catch (Exception e) {
+            //e.printStackTrace();
+        }
+
 
         holder.tvName.setText(mItem.getName());
         holder.tvDepartment.setText(mItem.getDepartment());
         holder.tvEmployeeNumber.setText(mItem.getEmployeeNumber());
 
 
-        /*******************************************************************************
-
-         TODO: 작업2 : 근무상태 목록 정하고 변경 필요
-         아래는 임시, 색상도 변경 필요
-         ******************************************************************************/
-        String status = mItem.getStatus();
-        if (status == null) {
-            holder.tvStatus.setBackgroundResource(R.drawable.bg_round_invisible_view);
-            status = "";
-        } else if (status.equals("비정상")) {
-            holder.tvStatus.setBackgroundResource(R.drawable.bg_round_ed2939_view);
-        } else if (status.equals("퇴근완료")) {
-            holder.tvStatus.setBackgroundResource(R.drawable.bg_round_00c8ff_view);
-        } else if (status.equals("근무중")) {
-            holder.tvStatus.setBackgroundResource(R.drawable.bg_round_000181_view);
-        } else if (status.equals("완료")) {
-            holder.tvStatus.setBackgroundResource(R.drawable.bg_round_darkgray_view);
+        Calendar calendar = Calendar.getInstance(Locale.KOREA);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yy-MM-dd", Locale.KOREA);
+        dateFormat.setTimeZone(TimeZone.getTimeZone("Asia/Seoul"));
+        String currentDate = dateFormat.format(calendar.getTime());
+        if (date.equals(currentDate)) {
+            isToday = true;
         } else {
-            holder.tvStatus.setBackgroundResource(R.drawable.bg_round_invisible_view);
-            status = "";
+            isToday = false;
         }
-        holder.tvStatus.setText(status);
-
 
         RangeSeekBar rangeSeekBar = holder.rangeSeekBar;
-        rangeSeekBar.setPadding(20, 0, 20, 0);
+        rangeSeekBar.setPadding(25, 0, 25, 0);
         rangeSeekBar.getLeftSeekBar().setIndicatorPaddingLeft(15);
         rangeSeekBar.getRightSeekBar().setIndicatorPaddingRight(15);
         rangeSeekBar.setEnabled(false);
@@ -92,6 +91,8 @@ public class DailyAttendanceReportAdapter extends RecyclerView.Adapter<DailyAtte
         String endTime = mItem.getEndTime();
 
         if (startTime == null || startTime.isEmpty() || endTime == null || endTime.isEmpty()) {
+            holder.tvStatus.setBackgroundResource(R.drawable.bg_round_invisible_view);
+            holder.tvStatus.setText("");
             String[] tickArray = new String[5];
             Arrays.fill(tickArray, "");
             tickArray[2] = "등록된 근무가 없습니다.";
@@ -121,49 +122,70 @@ public class DailyAttendanceReportAdapter extends RecyclerView.Adapter<DailyAtte
             rightSeekbar.setThumbDrawableId(R.drawable.ic_circle_invisible);
             leftSeekBar.setIndicatorTextColor(Color.TRANSPARENT);
             rightSeekbar.setIndicatorTextColor(Color.TRANSPARENT);
-
-        } else if (clockOutTIme == null || clockOutTIme.isEmpty()) {
-            SeekBar rightSeekbar = rangeSeekBar.getRightSeekBar();
-            rightSeekbar.setIndicatorTextColor(Color.TRANSPARENT);
-
-            float leftSeekBarPercent = percentageCaculator(startTime, endTime, clockInTime);
-
-            SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm", Locale.KOREA);
-            timeFormat.setTimeZone(TimeZone.getTimeZone("Asia/Seoul"));
-            String currentTime = timeFormat.format(new Date(System.currentTimeMillis()));
-            float rightSeekbarPercent = percentageCaculator(startTime, endTime, currentTime);
-
-            rangeSeekBar.setProgress(leftSeekBarPercent, rightSeekbarPercent);
-            rangeSeekBar.getLeftSeekBar().setIndicatorText(mItem.getClockInTime() + " 출근");
-        } else {
-            float leftSeekBarPercent = 0;
-            float rightSeekBarPercent = 100;
-            try {
+            rangeSeekBar.setProgress(0, 0);
+            if (isToday) {
                 SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm", Locale.KOREA);
-                Long longStartTime = timeFormat.parse(mItem.getStartTime()).getTime();
-                Long longEndTime = timeFormat.parse(mItem.getEndTime()).getTime();
-                Long longClockInTime = timeFormat.parse(mItem.getClockInTime()).getTime();
-                Long longClockOutTime = timeFormat.parse(mItem.getClockOutTime()).getTime();
-                long total = longEndTime - longStartTime;
-
-                if (longClockInTime > longStartTime) {
-                    long left = longClockInTime - longStartTime;
-                    leftSeekBarPercent = left * 100f / total;
+                timeFormat.setTimeZone(TimeZone.getTimeZone("Asia/Seoul"));
+                String currentTime = timeFormat.format(new Date(System.currentTimeMillis()));
+                float currentPercent = percentageCaculator(startTime, endTime, currentTime);
+                if (currentPercent > 0f) {
+                    holder.tvStatus.setBackgroundResource(R.drawable.bg_round_ed2939_view);
+                    holder.tvStatus.setText("지각");
+                } else {
+                    holder.tvStatus.setBackgroundResource(R.drawable.bg_round_000181_view);
+                    holder.tvStatus.setText("근무일");
                 }
 
-                if (longClockOutTime < longEndTime) {
-                    long right = longClockOutTime - longStartTime;
-                    rightSeekBarPercent = right * 100f / total;
-                }
-
-
-            } catch (ParseException | NullPointerException e) {
-                e.printStackTrace();
+            } else {
+                holder.tvStatus.setBackgroundResource(R.drawable.bg_round_ed2939_view);
+                holder.tvStatus.setText("출퇴근 미체크");
             }
 
+        } else if (clockOutTIme == null || clockOutTIme.isEmpty()) {
+            SeekBar leftSeekBar = rangeSeekBar.getLeftSeekBar();
+            SeekBar rightSeekbar = rangeSeekBar.getRightSeekBar();
+            leftSeekBar.setThumbDrawableId(R.drawable.ic_circle);
+            rightSeekbar.setThumbDrawableId(R.drawable.ic_circle);
+            leftSeekBar.setIndicatorTextColor(Color.parseColor("#ff9800"));
+            rightSeekbar.setIndicatorTextColor(Color.TRANSPARENT);
+            float leftSeekBarPercent = percentageCaculator(startTime, endTime, clockInTime);
+            if (isToday) {
+                holder.tvStatus.setBackgroundResource(R.drawable.bg_round_000181_view);
+                holder.tvStatus.setText("근무중");
+                SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm", Locale.KOREA);
+                timeFormat.setTimeZone(TimeZone.getTimeZone("Asia/Seoul"));
+                String currentTime = timeFormat.format(new Date(System.currentTimeMillis()));
+                float rightSeekbarPercent = percentageCaculator(startTime, endTime, currentTime);
+                rangeSeekBar.setProgress(leftSeekBarPercent, rightSeekbarPercent);
+            } else {
+                holder.tvStatus.setBackgroundResource(R.drawable.bg_round_ed2939_view);
+                holder.tvStatus.setText("퇴근 미체크");
+                rangeSeekBar.setProgress(leftSeekBarPercent, 100);
+            }
+
+            rangeSeekBar.getLeftSeekBar().setIndicatorText(mItem.getClockInTime() + " 출근");
+        } else {
+            SeekBar leftSeekBar = rangeSeekBar.getLeftSeekBar();
+            SeekBar rightSeekbar = rangeSeekBar.getRightSeekBar();
+            leftSeekBar.setThumbDrawableId(R.drawable.ic_circle);
+            rightSeekbar.setThumbDrawableId(R.drawable.ic_circle);
+            leftSeekBar.setIndicatorTextColor(Color.parseColor("#ff9800"));
+            rightSeekbar.setIndicatorTextColor(Color.parseColor("#ff9800"));
+            float leftSeekBarPercent = percentageCaculator(startTime, endTime, clockInTime);
+            float rightSeekBarPercent = percentageCaculator(startTime, endTime, clockOutTIme);
             rangeSeekBar.setProgress(leftSeekBarPercent, rightSeekBarPercent);
             rangeSeekBar.getLeftSeekBar().setIndicatorText(mItem.getClockInTime() + " 출근");
             rangeSeekBar.getRightSeekBar().setIndicatorText(mItem.getClockOutTime() + " 퇴근");
+            if (leftSeekBarPercent > 2f) {
+                holder.tvStatus.setBackgroundResource(R.drawable.bg_round_ed2939_view);
+                holder.tvStatus.setText("지각");
+            } else if(rightSeekBarPercent < 98f) {
+                holder.tvStatus.setBackgroundResource(R.drawable.bg_round_ed2939_view);
+                holder.tvStatus.setText("조기퇴근");
+            } else {
+                holder.tvStatus.setBackgroundResource(R.drawable.bg_round_darkgray_view);
+                holder.tvStatus.setText("정상");
+            }
         }
 
     }

@@ -1,5 +1,7 @@
 package com.gbridge.etners.data;
 
+import com.google.gson.annotations.SerializedName;
+
 public class DailyAttendanceReportItem {
     String name;
     String department;
@@ -9,6 +11,20 @@ public class DailyAttendanceReportItem {
     String endTime;
     String clockInTime;
     String clockOutTime;
+
+    @Override
+    public String toString() {
+        return "DailyAttendanceReportItem{" +
+                "name='" + name + '\'' +
+                ", department='" + department + '\'' +
+                ", employeeNumber='" + employeeNumber + '\'' +
+                ", status='" + status + '\'' +
+                ", startTime='" + startTime + '\'' +
+                ", endTime='" + endTime + '\'' +
+                ", clockInTime='" + clockInTime + '\'' +
+                ", clockOutTime='" + clockOutTime + '\'' +
+                '}';
+    }
 
     public DailyAttendanceReportItem(String name, String department, String employeeNumber, String status, String startTime, String endTime, String clockInTime, String clockOutTime) {
         this.name = name;
