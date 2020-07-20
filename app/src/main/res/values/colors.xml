@@ -13,5 +13,8 @@
     <color name="colorWhite">#ffffff</color>
     <color name="colorBlack">#000000</color>
     <color name="colorDefault">#ECECEC</color>
-    <color name="colorDivider">#EDD1D0D0</color>
+    <color name="colorDivider">#EDAEAEAE</color>
+    <color name="colorRed">#FF0000</color>
+    <color name="colorLittleBlack">#222222</color>
+
 </resources>

@@ -3,6 +3,7 @@ package com.gbridge.etners.ui.login;
 
 import android.util.Log;
 
+import com.gbridge.etners.R;
 import com.gbridge.etners.ui.login.interfaces.LogInActivityView;
 import com.gbridge.etners.ui.login.interfaces.LogInRetrofitInterface;
 import com.gbridge.etners.ui.login.models.LogInBody;
@@ -38,13 +39,13 @@ class LogInService {
                     mLogInActivityView.logInSuccess(logInResponse.getMessage(), logInResponse.getToken());
                 }else if(response.code() == 400){
                     Log.d("test", "잘못된로그인정보");
-                    mLogInActivityView.validateFailure(null);
+                    mLogInActivityView.validateFailure("아이디와 비밀번호를 확인하세요");
                 }else if(response.code() == 403){
                     Log.d("test","비밀번호 틀림");
-                    mLogInActivityView.validateFailure(null);
+                    mLogInActivityView.validateFailure("아이디와 비밀번호를 확인하세요");
                 }else if(response.code() == 404){
                     Log.d("test","서버에 없는 아이디");
-                    mLogInActivityView.validateFailure(null);
+                    mLogInActivityView.validateFailure("아이디와 비밀번호를 확인하세요");
                 }else if(response.code() == 415){
                     Log.d("test","잘못된 요청타입");
                     mLogInActivityView.validateFailure(null);

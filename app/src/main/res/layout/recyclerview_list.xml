@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    android:id="@+id/list_rv_all"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/border_orange"
@@ -48,6 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
+            android:layout_gravity="center"
             android:orientation="vertical">
 
             <TextView
@@ -62,11 +65,12 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp">
+                android:layout_marginTop="3dp">
 
                 <ImageView
                     android:layout_width="23dp"
                     android:layout_height="23dp"
+                    android:layout_marginStart="-4dp"
                     android:layout_gravity="center_vertical"
                     android:src="@drawable/ic_list_clock" />
 
@@ -75,6 +79,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
+                    android:layout_marginStart="-1dp"
                     android:text="08시간 00분"
                     android:textColor="@color/colorSoftblack"
                     android:textSize="15sp"
@@ -85,7 +90,7 @@
                 android:id="@+id/list_rv_schedule"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="3dp"
                 android:text="정시출근"
                 android:textColor="@color/colorSoftblack"
                 android:textSize="15sp" />
