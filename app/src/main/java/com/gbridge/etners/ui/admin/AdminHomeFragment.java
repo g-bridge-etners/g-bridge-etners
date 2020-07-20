@@ -54,7 +54,7 @@ public class AdminHomeFragment extends BaseFragment implements View.OnClickListe
         // Set buttons click listener
         view.findViewById(R.id.btn_admin_home_employee_attendance_management).setOnClickListener(this);
         view.findViewById(R.id.btn_admin_home_daily_attendance_report).setOnClickListener(this);
-        view.findViewById(R.id.btn_admin_home_weekly_attendance_report).setOnClickListener(this);
+        view.findViewById(R.id.btn_admin_home_company_location_management).setOnClickListener(this);
 
         return view;
     }
@@ -91,9 +91,9 @@ public class AdminHomeFragment extends BaseFragment implements View.OnClickListe
                 Log.d(TAG, "onClick: DAR");
                 ((AdminActivity) getActivity()).replaceWithBackStack(DailyAttendanceReportFragment.newInstance());
                 break;
-            case R.id.btn_admin_home_weekly_attendance_report:
+            case R.id.btn_admin_home_company_location_management:
                 Log.d(TAG, "onClick: WAR");
-                ((AdminActivity) getActivity()).replaceWithBackStack(WeeklyAttendanceReportFragment.newInstance());
+                ((AdminActivity) getActivity()).replaceWithBackStack(CompanyLocationManagementFragment.newInstance());
                 break;
         }
     }
