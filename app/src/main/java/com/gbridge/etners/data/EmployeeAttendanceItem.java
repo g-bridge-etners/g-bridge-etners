@@ -5,16 +5,19 @@ public class EmployeeAttendanceItem {
     private String name;
     private String department;
     private String employeeNumber;
+    private String title;
+    private String description;
     private String startTime;
     private String endTime;
     private String startDate;
     private String endDate;
 
-
-    public EmployeeAttendanceItem(String name, String department, String employeeNumber, String startTime, String endTime, String startDate, String endDate) {
+    public EmployeeAttendanceItem(String name, String department, String employeeNumber, String title, String description, String startTime, String endTime, String startDate, String endDate) {
         this.name = name;
         this.department = department;
         this.employeeNumber = employeeNumber;
+        this.title = title;
+        this.description = description;
         this.startTime = startTime;
         this.endTime = endTime;
         this.startDate = startDate;
@@ -43,6 +46,22 @@ public class EmployeeAttendanceItem {
 
     public void setEmployeeNumber(String employeeNumber) {
         this.employeeNumber = employeeNumber;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getStartTime() {

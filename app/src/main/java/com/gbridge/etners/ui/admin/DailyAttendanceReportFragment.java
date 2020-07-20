@@ -1,6 +1,5 @@
 package com.gbridge.etners.ui.admin;
 
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,19 +15,31 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CalendarView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.gbridge.etners.R;
 import com.gbridge.etners.data.DailyAttendanceReportItem;
-import com.gbridge.etners.data.EmployeeAttendanceItem;
 import com.gbridge.etners.ui.admin.adapter.DailyAttendanceReportAdapter;
-import com.gbridge.etners.ui.admin.adapter.EmployeeAttendanceManagementAdapter;
+import com.gbridge.etners.util.retrofit.admin.AdminService;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
+import com.hmomeni.progresscircula.ProgressCircula;
 
+import java.net.HttpURLConnection;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class DailyAttendanceReportFragment extends Fragment {
@@ -39,6 +50,12 @@ public class DailyAttendanceReportFragment extends Fragment {
     private CalendarView calendarView;
     private TextView tvDate;
     private DailyAttendanceReportAdapter myAdapter;
+    private Retrofit retrofit;
+    private AdminService adminService;
+    private String token;
+    private ProgressCircula progressCircula;
+    private LinearLayout containerEmpty;
+
     public DailyAttendanceReportFragment() {
     }
 
@@ -59,17 +76,32 @@ public class DailyAttendanceReportFragment extends Fragment {
         Log.d(TAG, "onCreateView: RUN");
         View view = inflater.inflate(R.layout.fragment_daily_attendance_report, container, false);
 
-
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_daily_attendance_report);
         calendarView = (CalendarView) view.findViewById(R.id.calendar_view_daily_attendance_report);
         tvDate = (TextView) view.findViewById(R.id.tv_daily_attendance_report_date);
+        progressCircula = (ProgressCircula) view.findViewById(R.id.progress_circular_daily_attendance_report);
+        containerEmpty = (LinearLayout) view.findViewById(R.id.container_empty_data_daily_attendance_report);
+
+        showInnerProgress();
+
+        token = ((AdminActivity) getActivity()).getToken();
 
         // Set actionbar
         initActionBar();
+        initRetrofit();
         initRecyclerView();
         initCalendarView();
 
+
         return view;
+    }
+
+    private void initRetrofit() {
+        retrofit = new Retrofit.Builder()
+                .baseUrl("http://34.82.68.95:3000")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        adminService = retrofit.create(AdminService.class);
     }
 
     private void initActionBar() {
@@ -91,14 +123,11 @@ public class DailyAttendanceReportFragment extends Fragment {
         myAdapter = new DailyAttendanceReportAdapter();
         recyclerView.setAdapter(myAdapter);
 
-        /*******************************************************************************
-
-         TODO: 작업1 - 서버에서 데이터 불러오는 작업 필요 By 날짜 (REST API 개발중)
-         초기 뷰 생성시 오늘 날짜로 rest api 호출 및
-         updateRecyclerView에 LIST 전달
-
-         ******************************************************************************/
-        updateRecyclerView(getTestData());
+        Long currentTime = calendarView.getDate();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yy-MM-dd", Locale.KOREA);
+        String currentDate = dateFormat.format(currentTime);
+        myAdapter.setDate(currentDate);
+        readServerData(currentDate);
     }
 
     private void initCalendarView() {
@@ -114,21 +143,31 @@ public class DailyAttendanceReportFragment extends Fragment {
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
+                myAdapter.changeItems(new ArrayList<>());
+                containerEmpty.setVisibility(View.GONE);
                 tvDate.setText(String.format(Locale.KOREA, "%d년 %d월 %d일", year, month + 1, dayOfMonth));
-
-                /*******************************************************************************
-
-                 TODO: 작업1 - 서버에서 데이터 불러오는 작업 필요 By 날짜 (REST API 개발중)
-                 날짜 선택시 REST API 호출하고
-                 updateRecyclerView에 LIST 넘겨야 함
-
-                 ******************************************************************************/
-                updateRecyclerView(getTestData2());
+                String changeYear = Integer.toString(year).substring(2);
+                String changeMonth;
+                if (month < 10) {
+                    changeMonth = "0" + (month + 1);
+                } else {
+                    changeMonth = Integer.toString(month + 1);
+                }
+                String changeDay;
+                if (dayOfMonth < 10) {
+                    changeDay = "0" + dayOfMonth;
+                } else {
+                    changeDay = Integer.toString(dayOfMonth);
+                }
+                String date = changeYear + "-" + changeMonth + "-" + changeDay;
+                showInnerProgress();
+                readServerData(date);
+                myAdapter.setDate(date);
             }
         });
     }
 
-    private void updateRecyclerView(List<DailyAttendanceReportItem> items){
+    private void updateRecyclerView(List<DailyAttendanceReportItem> items) {
         myAdapter.changeItems(items);
     }
 
@@ -142,93 +181,41 @@ public class DailyAttendanceReportFragment extends Fragment {
     }
 
 
-    /*******************************************************************************
+    private void readServerData(String date) {
+        adminService.getDailyReport(token, date).enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if (response.isSuccessful()) {
+                    JsonObject jsonObject = response.body();
+                    JsonArray jsonArray = jsonObject.getAsJsonArray("dailyReport");
+                    List<DailyAttendanceReportItem> list = new Gson().fromJson(jsonArray.toString(), new TypeToken<List<DailyAttendanceReportItem>>() {
+                    }.getType());
+                    myAdapter.changeItems(list);
 
-     TODO: 작업1 - 서버에서 데이터 불러오는 작업 필요 By 날짜 (REST API 개발중)
-     날짜로 데이터 불러오는 REST API 필요
+                } else if (response.code() == HttpURLConnection.HTTP_NOT_FOUND) {
+                    containerEmpty.setVisibility(View.VISIBLE);
+                } else {
+                    Toast.makeText(getContext(), "로딩실패", Toast.LENGTH_SHORT).show();
+                }
+                hideInnerProgress();
+            }
 
-     ******************************************************************************/
-    private List<DailyAttendanceReportItem> getTestData() {
-        ArrayList<DailyAttendanceReportItem> list = new ArrayList<>();
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                Log.d(TAG, t.getMessage());
+                hideInnerProgress();
+                Toast.makeText(getContext(), "로딩실패", Toast.LENGTH_SHORT).show();
 
-        list.add(new DailyAttendanceReportItem("김태호",
-                "개발팀", "201739413", "비정상", "09:00", "17:00", "10:00", "16:00"));
-        list.add(new DailyAttendanceReportItem("정영훈",
-                "개발팀", "201000000", "근무중", "09:00", "17:00", "09:00", null));
-        list.add(new DailyAttendanceReportItem("천재웅",
-                "개발팀", "201000000", null, "10:00", null, "09:00", "18:00"));
-        list.add(new DailyAttendanceReportItem("최다빈",
-                "개발팀", "201000000", "완료", "11:00", "17:00", "11:00", "17:00"));
-        list.add(new DailyAttendanceReportItem("김수현",
-                "기획팀", "201739433", "퇴근완료", "09:00", "17:00", "09:00", "18:00"));
-        list.add(new DailyAttendanceReportItem("서예지",
-                "경영팀", "201839413", "퇴근완료", "09:00", "17:00", "09:00", "18:00"));
-        list.add(new DailyAttendanceReportItem("김태호",
-                "개발팀", "201739413", "퇴근완료", "09:00", "17:00", "09:00", "18:00"));
-        list.add(new DailyAttendanceReportItem("김태호",
-                "개발팀", "201739413", "퇴근완료", "09:00", "17:00", "09:00", "18:00"));
-        list.add(new DailyAttendanceReportItem("김태호",
-                "개발팀", "201739413", "퇴근완료", "09:00", "17:00", "09:00", "18:00"));
-        list.add(new DailyAttendanceReportItem("김태호",
-                "개발팀", "201739413", "퇴근완료", "09:00", "17:00", "09:00", "18:00"));
-        list.add(new DailyAttendanceReportItem("김태호",
-                "개발팀", "201739413", "퇴근완료", "09:00", "17:00", "09:00", "18:00"));
-        list.add(new DailyAttendanceReportItem("김태호",
-                "개발팀", "201739413", "퇴근완료", "09:00", "17:00", "09:00", "18:00"));
-        list.add(new DailyAttendanceReportItem("김태호",
-                "개발팀", "201739413", "퇴근완료", "09:00", "17:00", "09:00", "18:00"));
-        list.add(new DailyAttendanceReportItem("김태호",
-                "개발팀", "201739413", "퇴근완료", "09:00", "17:00", "09:00", "18:00"));
-        list.add(new DailyAttendanceReportItem("김태호",
-                "개발팀", "201739413", "퇴근완료", "09:00", "17:00", "09:00", "18:00"));
-        list.add(new DailyAttendanceReportItem("김태호",
-                "개발팀", "201739413", "퇴근완료", "09:00", "17:00", "09:00", "18:00"));
-        list.add(new DailyAttendanceReportItem("김태호",
-                "개발팀", "201739413", "퇴근완료", "09:00", "17:00", "09:00", "18:00"));
-        list.add(new DailyAttendanceReportItem("김태호",
-                "개발팀", "201739413", "퇴근완료", "09:00", "17:00", "09:00", "18:00"));
-        return list;
+            }
+        });
     }
-    private List<DailyAttendanceReportItem> getTestData2() {
-        ArrayList<DailyAttendanceReportItem> list = new ArrayList<>();
 
-        list.add(new DailyAttendanceReportItem("테스트",
-                "개발팀", "201739413", "퇴근완료", "09:00", "17:00", "11:00", "18:00"));
-        list.add(new DailyAttendanceReportItem("정영훈",
-                "개발팀", "201000000", "근무중", "09:00", "17:00", "09:00", null));
-        list.add(new DailyAttendanceReportItem("천재웅",
-                "개발팀", "201000000", "퇴근완료", "10:00", null, "09:00", "18:00"));
-        list.add(new DailyAttendanceReportItem("최다빈",
-                "개발팀", "201000000", "퇴근완료", "11:00", "17:00", "12:00", "16:00"));
-        list.add(new DailyAttendanceReportItem("김수현",
-                "기획팀", "201739433", "퇴근완료", "09:00", "17:00", "09:00", "18:00"));
-        list.add(new DailyAttendanceReportItem("서예지",
-                "경영팀", "201839413", "퇴근완료", "09:00", "17:00", "09:00", "18:00"));
-        list.add(new DailyAttendanceReportItem("김태호",
-                "개발팀", "201739413", "퇴근완료", "09:00", "17:00", "09:00", "18:00"));
-        list.add(new DailyAttendanceReportItem("김태호",
-                "개발팀", "201739413", "퇴근완료", "09:00", "17:00", "09:00", "18:00"));
-        list.add(new DailyAttendanceReportItem("김태호",
-                "개발팀", "201739413", "퇴근완료", "09:00", "17:00", "09:00", "18:00"));
-        list.add(new DailyAttendanceReportItem("김태호",
-                "개발팀", "201739413", "퇴근완료", "09:00", "17:00", "09:00", "18:00"));
-        list.add(new DailyAttendanceReportItem("김태호",
-                "개발팀", "201739413", "퇴근완료", "09:00", "17:00", "09:00", "18:00"));
-        list.add(new DailyAttendanceReportItem("김태호",
-                "개발팀", "201739413", "퇴근완료", "09:00", "17:00", "09:00", "18:00"));
-        list.add(new DailyAttendanceReportItem("김태호",
-                "개발팀", "201739413", "퇴근완료", "09:00", "17:00", "09:00", "18:00"));
-        list.add(new DailyAttendanceReportItem("김태호",
-                "개발팀", "201739413", "퇴근완료", "09:00", "17:00", "09:00", "18:00"));
-        list.add(new DailyAttendanceReportItem("김태호",
-                "개발팀", "201739413", "퇴근완료", "09:00", "17:00", "09:00", "18:00"));
-        list.add(new DailyAttendanceReportItem("김태호",
-                "개발팀", "201739413", "퇴근완료", "09:00", "17:00", "09:00", "18:00"));
-        list.add(new DailyAttendanceReportItem("김태호",
-                "개발팀", "201739413", "퇴근완료", "09:00", "17:00", "09:00", "18:00"));
-        list.add(new DailyAttendanceReportItem("김태호",
-                "개발팀", "201739413", "퇴근완료", "09:00", "17:00", "09:00", "18:00"));
-        return list;
+    private void showInnerProgress(){
+        progressCircula.setVisibility(View.VISIBLE);
     }
+    private void hideInnerProgress(){
+        progressCircula.setVisibility(View.GONE);
+    }
+
 
 }

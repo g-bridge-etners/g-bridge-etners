@@ -11,7 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.gbridge.etners.R;
-import com.gbridge.etners.data.EmployeeAttendanceManagementItem;
+import com.gbridge.etners.data.EmployeeAttendanceItem;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -34,11 +34,11 @@ public abstract class EmployeeAttendanceManagementDialog extends Dialog implemen
     private Button btnSubmit;
     private Button btnCancle;
 
-    private EmployeeAttendanceManagementItem item;
+    private EmployeeAttendanceItem item;
     private Activity activity;
 
 
-    public EmployeeAttendanceManagementDialog(@NonNull Activity activity, EmployeeAttendanceManagementItem item) {
+    public EmployeeAttendanceManagementDialog(@NonNull Activity activity, EmployeeAttendanceItem item) {
         super(activity);
         this.item = item;
         this.activity = activity;
@@ -65,14 +65,14 @@ public abstract class EmployeeAttendanceManagementDialog extends Dialog implemen
         btnSubmit.setOnClickListener(this);
         btnCancle.setOnClickListener(this);
 
-        if (item != null) {
-            edtTitle.setText(item.getTitle());
-            edtDescription.setText(item.getDescription());
-            edtStartDate.setText(item.getStartDate());
-            edtEndDate.setText(item.getEndDate());
-            edtStartTime.setText(item.getStartTime());
-            edtEndTime.setText(item.getEndTime());
-        }
+
+        edtTitle.setText(item.getTitle());
+        edtDescription.setText(item.getDescription());
+        edtStartDate.setText(item.getStartDate());
+        edtEndDate.setText(item.getEndDate());
+        edtStartTime.setText(item.getStartTime());
+        edtEndTime.setText(item.getEndTime());
+
 
     }
 
@@ -122,14 +122,16 @@ public abstract class EmployeeAttendanceManagementDialog extends Dialog implemen
                 if (title.isEmpty() || description.isEmpty() || startDate.isEmpty() || endDate.isEmpty() || startTime.isEmpty() || endTime.isEmpty()) {
                     Toast.makeText(activity, "모든 항목을 빠짐없이 입력해주세요.", Toast.LENGTH_SHORT).show();
                 } else {
-                    item = new EmployeeAttendanceManagementItem(
-
+                    item = new EmployeeAttendanceItem(
+                            item.getName(),
+                            item.getDepartment(),
+                            item.getEmployeeNumber(),
                             edtTitle.getText().toString(),
                             edtDescription.getText().toString(),
-                            edtStartDate.getText().toString(),
-                            edtEndDate.getText().toString(),
                             edtStartTime.getText().toString(),
-                            edtEndTime.getText().toString()
+                            edtEndTime.getText().toString(),
+                            edtStartDate.getText().toString(),
+                            edtEndDate.getText().toString()
                     );
                     onPositiveClicked(item);
                     dismiss();
@@ -143,7 +145,7 @@ public abstract class EmployeeAttendanceManagementDialog extends Dialog implemen
     }
 
 
-    public abstract void onPositiveClicked(EmployeeAttendanceManagementItem item);
+    public abstract void onPositiveClicked(EmployeeAttendanceItem item);
 
     public abstract void onNegativeClicked();
 
