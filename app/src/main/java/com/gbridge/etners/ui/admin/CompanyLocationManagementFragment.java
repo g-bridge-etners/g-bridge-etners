@@ -2,11 +2,13 @@ package com.gbridge.etners.ui.admin;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -106,8 +108,9 @@ public class CompanyLocationManagementFragment extends Fragment implements View.
         imgBtnRefreshGps.setOnClickListener(this);
         imgBtnRefreshWifi.setOnClickListener(this);
 
-        token = ((AdminActivity)getActivity()).getToken();
+        token = ((AdminActivity) getActivity()).getToken();
 
+        initActionBar();
         initRetrofit();
 
         return view;
@@ -140,6 +143,15 @@ public class CompanyLocationManagementFragment extends Fragment implements View.
         }
     }
 
+    private void initActionBar() {
+        setHasOptionsMenu(true);
+        AdminActivity adminActivity = (AdminActivity) getActivity();
+        ActionBar ahActionBar = adminActivity.getSupportActionBar();
+        ahActionBar.setTitle(R.string.admin_company_location_management);
+        ahActionBar.setDisplayHomeAsUpEnabled(true);
+
+    }
+
     private void initRetrofit() {
         retrofit = new Retrofit.Builder()
                 .baseUrl("http://34.82.68.95:3000")
@@ -152,16 +164,17 @@ public class CompanyLocationManagementFragment extends Fragment implements View.
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_company_location_submit_gps:
-                adminService.postLocation(token, new RequestPostLocation("gps",currentLatitude,currentLongitude,null)).enqueue(new Callback<JsonObject>() {
+                adminService.postLocation(token, new RequestPostLocation("gps", currentLatitude, currentLongitude, null)).enqueue(new Callback<JsonObject>() {
                     @Override
                     public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                         Log.d("test1", Integer.toString(response.code()));
-                        if(response.isSuccessful()){
+                        if (response.isSuccessful()) {
                             Toast.makeText(getContext(), "등록성공", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(getContext(), "등록실패", Toast.LENGTH_SHORT).show();
                         }
                     }
+
                     @Override
                     public void onFailure(Call<JsonObject> call, Throwable t) {
                         Log.d("test1", t.getMessage());
@@ -170,15 +183,16 @@ public class CompanyLocationManagementFragment extends Fragment implements View.
                 });
                 break;
             case R.id.btn_company_location_submit_wifi:
-                adminService.postLocation(token, new RequestPostLocation("wifi",null,null,currentAp)).enqueue(new Callback<JsonObject>() {
+                adminService.postLocation(token, new RequestPostLocation("wifi", null, null, currentAp)).enqueue(new Callback<JsonObject>() {
                     @Override
                     public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                        if(response.isSuccessful()){
+                        if (response.isSuccessful()) {
                             Toast.makeText(getContext(), "등록성공", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(getContext(), "등록실패", Toast.LENGTH_SHORT).show();
                         }
                     }
+
                     @Override
                     public void onFailure(Call<JsonObject> call, Throwable t) {
                         Toast.makeText(getContext(), "등록실패", Toast.LENGTH_SHORT).show();
@@ -192,5 +206,14 @@ public class CompanyLocationManagementFragment extends Fragment implements View.
                 refreshWifi();
                 break;
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            ((AdminActivity) getActivity()).removeAndPop(this);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
