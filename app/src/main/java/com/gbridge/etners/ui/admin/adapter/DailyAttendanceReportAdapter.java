@@ -137,8 +137,41 @@ public class DailyAttendanceReportAdapter extends RecyclerView.Adapter<DailyAtte
                 }
 
             } else {
-                holder.tvStatus.setBackgroundResource(R.drawable.bg_round_ed2939_view);
-                holder.tvStatus.setText("출퇴근 미체크");
+                Log.d("test", date.substring(0,2));
+                Log.d("test", date.substring(3,5));
+                Log.d("test", date.substring(6,8));
+                int curYear = Integer.parseInt(currentDate.substring(0,2));
+                int curMonth = Integer.parseInt(currentDate.substring(3,5));
+                int curDay = Integer.parseInt(currentDate.substring(6,8));
+                int calYear = Integer.parseInt(date.substring(0,2));
+                int calMonth = Integer.parseInt(date.substring(3,5));
+                int calDay = Integer.parseInt(date.substring(6,8));
+                if(calYear > curYear ){
+                    holder.tvStatus.setBackgroundResource(R.drawable.bg_round_darkgray_view);
+                    holder.tvStatus.setText("대기중");
+                } else if (calYear == curYear){
+                    if(calMonth > curMonth){
+                        holder.tvStatus.setBackgroundResource(R.drawable.bg_round_darkgray_view);
+                        holder.tvStatus.setText("대기중");
+                    } else if( calMonth == curMonth){
+                        if(calDay > curDay){
+                            holder.tvStatus.setBackgroundResource(R.drawable.bg_round_darkgray_view);
+                            holder.tvStatus.setText("대기중");
+                        } else if (calDay == curDay) {
+                            holder.tvStatus.setBackgroundResource(R.drawable.bg_round_ed2939_view);
+                            holder.tvStatus.setText("지각");
+                        } else {
+                            holder.tvStatus.setBackgroundResource(R.drawable.bg_round_ed2939_view);
+                            holder.tvStatus.setText("출퇴근 미체크");
+                        }
+                    } else {
+                        holder.tvStatus.setBackgroundResource(R.drawable.bg_round_ed2939_view);
+                        holder.tvStatus.setText("출퇴근 미체크");
+                    }
+                } else {
+                    holder.tvStatus.setBackgroundResource(R.drawable.bg_round_ed2939_view);
+                    holder.tvStatus.setText("출퇴근 미체크");
+                }
             }
 
         } else if (clockOutTIme == null || clockOutTIme.isEmpty()) {
