@@ -20,6 +20,7 @@ import androidx.fragment.app.Fragment;
 
 import com.gbridge.etners.R;
 import com.gbridge.etners.util.GpsReceiver;
+import com.gbridge.etners.util.WifiUtil;
 import com.gbridge.etners.util.retrofit.commute.CommuteAPI;
 import com.gbridge.etners.util.retrofit.commute.CommuteRequest;
 import com.gbridge.etners.util.retrofit.commute.CommuteResponse;
@@ -39,13 +40,14 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
     private Context context;
     private Activity activity;
     private String token;
+    private boolean isWifiConnected = false;
     private boolean isGpsConnected = false;
     private int commuteState = 3;   //1:출근, 2:퇴근, 3: 미출근
     private Double lat;
     private Double lon;
 
     private LinearLayout stateLayout;
-    private ImageView gpsState;
+    private ImageView wifiState, gpsState;
     private TextView date, name, userState, startTime, endTime;
     private Button checkButton;
 
@@ -60,6 +62,8 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
+        wifiState = view.findViewById(R.id.home_wifiState);
+        wifiState.setOnClickListener(this);
         gpsState = view.findViewById(R.id.home_gpsState);
         gpsState.setOnClickListener(this);
         date = view.findViewById(R.id.home_date);
@@ -72,6 +76,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
 
         setDateView();
         checkCommuteState();
+        checkWifiState(view);
         checkGpsState(view);
 
 
@@ -81,6 +86,9 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch(v.getId()) {
+            case R.id.home_wifiState:
+                checkWifiState(v);
+                break;
             case R.id.home_gpsState:
                 checkGpsState(v);
                 break;
@@ -96,6 +104,21 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy년 MM월 dd일");
         String stringDate = simpleDateFormat.format(mDate);
         date.setText(stringDate);
+    }
+
+    private void checkWifiState(View view) {
+        String ap = WifiUtil.getAp(context);
+
+        if(ap != null) {
+            isWifiConnected = true;
+            wifiState.setImageResource(R.drawable.ic_wifi);
+            wifiState.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorAccent)));
+        }
+        else {
+            isWifiConnected = false;
+            wifiState.setImageResource(R.drawable.ic_wifi_off);
+            wifiState.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorGray)));
+        }
     }
 
     private void checkGpsState(View view) {
