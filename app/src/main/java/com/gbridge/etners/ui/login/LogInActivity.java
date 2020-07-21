@@ -123,4 +123,5 @@ public class LogInActivity extends BaseActivity implements LogInActivityView {
                 break;
         }
     }
+
 }
