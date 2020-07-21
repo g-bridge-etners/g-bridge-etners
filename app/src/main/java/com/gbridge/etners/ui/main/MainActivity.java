@@ -104,5 +104,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         return false;
     }
 
+    @Override
+    public void onBackPressed() {
+        finishAffinity();
+    }
+
     public String getToken() {return token;}
 }
