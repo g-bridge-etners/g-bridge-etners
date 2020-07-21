@@ -26,7 +26,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class SignupActivity extends AppCompatActivity implements View.OnClickListener {
     private Toolbar toolbar;
-    private EditText edtId, edtPw, edtPwCheck, edtName;
+    private EditText edtId, edtPw, edtPwCheck, edtDepartment, edtName;
     private Button btnSignup;
 
     @Override
@@ -47,6 +47,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         edtId = findViewById(R.id.signup_id);
         edtPw = findViewById(R.id.signup_pw);
         edtPwCheck = findViewById(R.id.signup_check);
+        edtDepartment = findViewById(R.id.signup_department);
         edtName = findViewById(R.id.signup_name);
 
         btnSignup = findViewById(R.id.signup_signupButton);
@@ -77,6 +78,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         String id = edtId.getText().toString();
         String pw = edtPw.getText().toString();
         String check = edtPwCheck.getText().toString();
+        String department = edtDepartment.getText().toString();
         String name = edtName.getText().toString();
 
         if(id.length() < 9) {
@@ -98,7 +100,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                 .baseUrl("http://34.82.68.95:3000/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        retrofit.create(RegisterAPI.class).register(new RegisterRequest(id, pw, name))
+        retrofit.create(RegisterAPI.class).register(new RegisterRequest(id, pw, department, name))
         .enqueue(new Callback<RegisterResponse>() {
             @Override
             public void onResponse(Call<RegisterResponse> call, Response<RegisterResponse> response) {
@@ -141,6 +143,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         edtId.setText("");
         edtPw.setText("");
         edtPwCheck.setText("");
+        edtDepartment.setText("");
         edtName.setText("");
         makeToast(message);
     }
