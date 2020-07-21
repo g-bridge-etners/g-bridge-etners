@@ -33,6 +33,7 @@
         android:hint="@string/login_id_hint"
         android:inputType="number"
         android:maxLines="1"
+        android:layout_marginTop="5dp"
         android:background="@drawable/border_empty"
         android:paddingStart="15dp"
         android:paddingEnd="15dp"
@@ -66,7 +67,8 @@
             android:paddingTop="13dp"
             android:paddingBottom="13dp"
             android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp"/>
+            android:layout_marginEnd="30dp"
+            android:layout_marginTop="5dp"/>
     </LinearLayout>
 
     <TextView
@@ -74,7 +76,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/login_title"
-        android:textSize="20sp"
         android:textColor="@color/colorWhite"
         android:paddingTop="15dp"
         android:paddingBottom="15dp"
@@ -92,7 +93,6 @@
         android:background="@drawable/btn_login_background"
         android:text="@string/signup_buttonText"
         android:textColor="@color/colorWhite"
-        android:textSize="20sp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         android:paddingTop="15dp"

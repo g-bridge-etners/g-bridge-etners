@@ -44,14 +44,14 @@
                     android:layout_marginStart="15dp"
                     android:text="홍길동"
                     android:textColor="@color/colorAccent"
-                    android:textSize="23sp" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="님 환영합니다."
-                    android:textSize="23sp" />
+                    android:textSize="20sp" />
 
             </LinearLayout>
 
@@ -128,8 +128,7 @@
                 android:layout_marginTop="32dp"
                 android:background="@drawable/btn_login_background"
                 android:text="로그아웃"
-                android:textColor="@color/colorWhite"
-                android:textSize="20sp" />
+                android:textColor="@color/colorWhite"/>
 
             <Button
                 android:id="@+id/setting_admin"
@@ -139,8 +138,7 @@
                 android:layout_marginTop="20dp"
                 android:background="@drawable/btn_login_background"
                 android:text="관리자 모드"
-                android:textColor="@color/colorWhite"
-                android:textSize="20sp" />
+                android:textColor="@color/colorWhite"/>
 
             <ImageView
                 android:id="@+id/setting_banner"
