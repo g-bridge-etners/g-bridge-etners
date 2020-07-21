@@ -205,7 +205,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
                     .baseUrl("http://34.82.68.95:3000/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
-            retrofit.create(CommuteAPI.class).commute(token, new CommuteRequest("gps", type, lat, lon, null))
+            retrofit.create(CommuteAPI.class).commute(token, new CommuteRequest("gps", type, lat, lon, ""))
                     .enqueue(new Callback<CommuteResponse>() {
                         @Override
                         public void onResponse(Call<CommuteResponse> call, Response<CommuteResponse> response) {
