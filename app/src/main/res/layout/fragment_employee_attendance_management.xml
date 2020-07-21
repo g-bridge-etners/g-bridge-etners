@@ -1,13 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/list"
-    android:name="com.gbridge.etners.ui.admin.IndividualScheduleManagementFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
-    app:layoutManager="LinearLayoutManager"
-    tools:context=".ui.admin.EmployeeAttendanceManagementFragment"
-    tools:listitem="@layout/item_employee_attendance_management" />
+    android:orientation="vertical"
+    tools:context=".ui.admin.EmployeeAttendanceManagementFragment">
+
+    <com.hmomeni.progresscircula.ProgressCircula
+        android:id="@+id/progress_circular_employee_attendance_management"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        app:pgc_indeterminate="true"
+        app:pgc_progress="40"
+        app:pgc_rimColor="@color/colorAccent"
+        app:pgc_rimWidth="3dp"
+        app:pgc_showProgress="true"
+        app:pgc_speed="3" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_employee_attendance_management"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="2dp" />
+
+
+    <LinearLayout
+        android:id="@+id/container_empty_data_employee_attendance_management"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorGainsboro" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/admin_layout_horizontal_padding"
+            android:paddingVertical="20dp"
+            android:text="@string/item_empty_data" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorGainsboro" />
+    </LinearLayout>
+</LinearLayout>

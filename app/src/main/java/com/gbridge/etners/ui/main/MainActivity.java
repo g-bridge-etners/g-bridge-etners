@@ -2,10 +2,16 @@ package com.gbridge.etners.ui.main;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
@@ -13,20 +19,62 @@ import com.gbridge.etners.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
-    private FragmentManager fragmentManager = getSupportFragmentManager();
-    private FragmentHome fragmentHome = new FragmentHome();
-    private FragmentList fragmentList = new FragmentList();
-    private FragmentCalendar fragmentCalendar = new FragmentCalendar();
+    private FragmentManager fragmentManager;
+    private FragmentHome fragmentHome;
+    private FragmentList fragmentList;
+    private FragmentCalendar fragmentCalendar;
 
     private FrameLayout frame;
     private BottomNavigationView bnav;
+
+    private String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Intent intent = getIntent();
+        token = intent.getStringExtra("token");
+
+        fragmentManager = getSupportFragmentManager();
+        fragmentHome = new FragmentHome(this, this, token);
+        fragmentList = new FragmentList();
+        fragmentCalendar = new FragmentCalendar();
+
+        checkPermission();
+
         initViews();
+    }
+
+    private void checkPermission() {
+        String deniedPermissions = "";
+
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            deniedPermissions += Manifest.permission.ACCESS_FINE_LOCATION + " ";
+        }
+
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            deniedPermissions += Manifest.permission.ACCESS_COARSE_LOCATION + " ";
+        }
+
+        if(!deniedPermissions.isEmpty()) {
+            ActivityCompat.requestPermissions(this, deniedPermissions.trim().split(" "), 1);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if(requestCode == 1) {
+            int length = permissions.length;
+            for(int index = 0; index < length; index++) {
+                if(grantResults[index] == PackageManager.PERMISSION_GRANTED) {
+                    Log.d("MainActivity", "권한 허용: " + permissions[index]);
+                }
+            }
+        }
     }
 
     private void initViews() {
@@ -55,4 +103,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         }
         return false;
     }
+
+    public String getToken() {return token;}
 }

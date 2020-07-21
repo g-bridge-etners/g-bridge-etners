@@ -47,12 +47,20 @@
             android:text="@string/admin_daily_attendance_report_title" />
 
 
+        <TextView
+            style="@style/admin_home_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="@string/admin_home_menu_company_management" />
+
+
         <Button
-            android:id="@+id/btn_admin_home_weekly_attendance_report"
+            android:id="@+id/btn_admin_home_company_location_management"
             style="@style/admin_home_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/admin_weekly_attendance_report_title" />
+            android:text="@string/admin_company_location_management" />
 
     </LinearLayout>
 

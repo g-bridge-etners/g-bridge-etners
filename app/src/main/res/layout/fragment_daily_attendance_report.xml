@@ -1,14 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.admin.DailyAttendanceReportFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/sv_read_post"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="0dp"
+        android:scrollbarStyle="outsideOverlay"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-</FrameLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <CalendarView
+                android:id="@+id/calendar_view_daily_attendance_report"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/admin_layout_horizontal_padding"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_round_border_admin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_daily_attendance_report_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/admin_layout_horizontal_padding"
+                android:paddingTop="16dp"
+                android:paddingBottom="4dp"
+                android:text="2020년 7월 16일"
+                app:layout_constraintTop_toBottomOf="@id/calendar_view_daily_attendance_report"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorGainsboro"
+                app:layout_constraintTop_toBottomOf="@id/tv_daily_attendance_report_date"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_daily_attendance_report"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/tv_daily_attendance_report_date"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <com.hmomeni.progresscircula.ProgressCircula
+                android:layout_marginTop="15dp"
+                android:id="@+id/progress_circular_daily_attendance_report"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                app:pgc_indeterminate="true"
+                app:pgc_progress="40"
+                app:pgc_rimColor="@color/colorAccent"
+                app:pgc_rimWidth="3dp"
+                app:pgc_showProgress="true"
+                app:pgc_speed="3"
+                app:layout_constraintTop_toBottomOf="@id/recycler_view_daily_attendance_report"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/container_empty_data_daily_attendance_report"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/recycler_view_daily_attendance_report"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:orientation="vertical">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorGainsboro"/>
+
+                <TextView
+                    android:paddingVertical="20dp"
+                    android:paddingHorizontal="@dimen/admin_layout_horizontal_padding"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/item_empty_data"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorGainsboro"/>
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
