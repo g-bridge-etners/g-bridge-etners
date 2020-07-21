@@ -56,6 +56,13 @@ public class LogInActivity extends BaseActivity implements LogInActivityView {
         btnSignup = findViewById(R.id.login_signupButton);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mEtId.setText("");
+        mEtPw.setText("");
+    }
+
     private boolean checkValid(){
         id = mEtId.getText().toString();
         pw = mEtPw.getText().toString();

@@ -3,11 +3,7 @@ package com.gbridge.etners.ui.admin;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
-import android.widget.FrameLayout;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -15,10 +11,6 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.gbridge.etners.BaseActivity;
 import com.gbridge.etners.R;
-import com.gbridge.etners.ui.main.FragmentCalendar;
-import com.gbridge.etners.ui.main.FragmentHome;
-import com.gbridge.etners.ui.main.FragmentList;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import static com.gbridge.etners.ApplicationClass.X_ACCESS_TOKEN;
 

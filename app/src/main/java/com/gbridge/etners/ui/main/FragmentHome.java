@@ -2,6 +2,7 @@ package com.gbridge.etners.ui.main;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +20,7 @@ import androidx.fragment.app.Fragment;
 
 import com.gbridge.etners.R;
 import com.gbridge.etners.util.GpsReceiver;
+import com.gbridge.etners.util.WifiUtil;
 import com.gbridge.etners.util.retrofit.commute.CommuteAPI;
 import com.gbridge.etners.util.retrofit.commute.CommuteRequest;
 import com.gbridge.etners.util.retrofit.commute.CommuteResponse;
@@ -39,14 +40,16 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
     private Context context;
     private Activity activity;
     private String token;
+    private String method;
+    private boolean isWifiConnected = false;
     private boolean isGpsConnected = false;
     private int commuteState = 3;   //1:출근, 2:퇴근, 3: 미출근
     private Double lat;
     private Double lon;
+    private String ap;
 
-    private LinearLayout stateLayout;
-    private ImageView gpsState;
-    private TextView date, name, userState, startTime, endTime;
+    private ImageView wifiState, gpsState;
+    private TextView methodView, date, name, userState, startTime, endTime;
     private Button checkButton;
 
     public FragmentHome(Context context, Activity activity, String token) {
@@ -60,8 +63,15 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
+        SharedPreferences sf = context.getSharedPreferences("method", Context.MODE_PRIVATE);
+        method = sf.getString("method", "gps");
+
+        wifiState = view.findViewById(R.id.home_wifiState);
+        wifiState.setOnClickListener(this);
         gpsState = view.findViewById(R.id.home_gpsState);
         gpsState.setOnClickListener(this);
+        methodView = view.findViewById(R.id.home_method);
+        methodView.setText("인증방법: " + method.toUpperCase());
         date = view.findViewById(R.id.home_date);
         name = view.findViewById(R.id.home_name);
         userState = view.findViewById(R.id.home_userState);
@@ -72,15 +82,26 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
 
         setDateView();
         checkCommuteState();
+        checkWifiState(view);
         checkGpsState(view);
-
 
         return view;
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        SharedPreferences sf = context.getSharedPreferences("method", Context.MODE_PRIVATE);
+        method = sf.getString("method", "gps");
+        methodView.setText("인증방법: " + method.toUpperCase());
+    }
+
+    @Override
     public void onClick(View v) {
         switch(v.getId()) {
+            case R.id.home_wifiState:
+                checkWifiState(v);
+                break;
             case R.id.home_gpsState:
                 checkGpsState(v);
                 break;
@@ -96,6 +117,21 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy년 MM월 dd일");
         String stringDate = simpleDateFormat.format(mDate);
         date.setText(stringDate);
+    }
+
+    private void checkWifiState(View view) {
+        ap = WifiUtil.getAp(context);
+
+        if(ap != null) {
+            isWifiConnected = true;
+            wifiState.setImageResource(R.drawable.ic_wifi);
+            wifiState.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorAccent)));
+        }
+        else {
+            isWifiConnected = false;
+            wifiState.setImageResource(R.drawable.ic_wifi_off);
+            wifiState.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorGray)));
+        }
     }
 
     private void checkGpsState(View view) {
@@ -200,60 +236,120 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
 
         }
 
-        if(isGpsConnected) {
-            Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl("http://34.82.68.95:3000/")
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
-            retrofit.create(CommuteAPI.class).commute(token, new CommuteRequest("gps", type, lat, lon, null))
-                    .enqueue(new Callback<CommuteResponse>() {
-                        @Override
-                        public void onResponse(Call<CommuteResponse> call, Response<CommuteResponse> response) {
-                            if(response.code() == 200) {
-                                Log.d("FragmentHome", "성공");
-                                switch(commuteState) {
-                                    case 1:
-                                        Log.d("FragmentHome", "퇴근 완료");
-                                        break;
-                                    case 2:
-                                    case 3:
-                                        Log.d("FragmentHome", "출근 완료");
-                                        break;
+        switch(method) {
+            case "wifi":
+                if(isGpsConnected) {
+                    Retrofit retrofit = new Retrofit.Builder()
+                            .baseUrl("http://34.82.68.95:3000/")
+                            .addConverterFactory(GsonConverterFactory.create())
+                            .build();
+                    retrofit.create(CommuteAPI.class).commute(token, new CommuteRequest("wifi", type, 0d, 0d, ap))
+                            .enqueue(new Callback<CommuteResponse>() {
+                                @Override
+                                public void onResponse(Call<CommuteResponse> call, Response<CommuteResponse> response) {
+                                    if(response.code() == 200) {
+                                        Log.d("FragmentHome", "성공");
+                                        switch(commuteState) {
+                                            case 1:
+                                                Log.d("FragmentHome", "퇴근 완료");
+                                                break;
+                                            case 2:
+                                            case 3:
+                                                Log.d("FragmentHome", "출근 완료");
+                                                break;
 
+                                        }
+                                        checkCommuteState();
+                                    }
+                                    else if(response.code() == 400) {
+                                        Log.d("FragmentHome", "전달인자 오류");
+                                    }
+                                    else if(response.code() == 401) {
+                                        Log.d("FragmentHome", "토큰 검증 실패");
+                                    }
+                                    else if(response.code() == 406) {
+                                        Log.d("FragmentHome", "위치가 회사가 아님");
+                                    }
+                                    else if(response.code() == 415) {
+                                        Log.d("FragmentHome", "잘못된 요청타입");
+                                    }
+                                    else if(response.code() == 418) {
+                                        Log.d("FragmentHome", "출퇴근 상태 체크 오류");
+                                    }
+                                    else if(response.code() == 500) {
+                                        Log.d("FragmentHome", "서버 오류");
+                                    }
                                 }
-                                checkCommuteState();
-                            }
-                            else if(response.code() == 400) {
-                                Log.d("FragmentHome", "전달인자 오류");
-                            }
-                            else if(response.code() == 401) {
-                                Log.d("FragmentHome", "토큰 검증 실패");
-                            }
-                            else if(response.code() == 406) {
-                                Log.d("FragmentHome", "위치가 회사가 아님");
-                            }
-                            else if(response.code() == 415) {
-                                Log.d("FragmentHome", "잘못된 요청타입");
-                            }
-                            else if(response.code() == 418) {
-                                Log.d("FragmentHome", "출퇴근 상태 체크 오류");
-                            }
-                            else if(response.code() == 500) {
-                                Log.d("FragmentHome", "서버 오류");
-                            }
-                        }
 
-                        @Override
-                        public void onFailure(Call<CommuteResponse> call, Throwable t) {
-                            Log.d("FragmentHome", "출퇴근 API 연결 실패");
-                            t.printStackTrace();
-                        }
-                    });
-        }
-        else {
-            Toast.makeText(context, "GPS가 연결되어 있지 않습니다.", Toast.LENGTH_SHORT).show();
-            checkGpsState(view);
-        }
+                                @Override
+                                public void onFailure(Call<CommuteResponse> call, Throwable t) {
+                                    Log.d("FragmentHome", "출퇴근 API 연결 실패");
+                                    t.printStackTrace();
+                                }
+                            });
+                }
+                else {
+                    Toast.makeText(context, "Wifi가 연결되어 있지 않습니다.", Toast.LENGTH_SHORT).show();
+                    checkWifiState(view);
+                }
+                break;
 
+            case "gps":
+                if(isGpsConnected) {
+                    Retrofit retrofit = new Retrofit.Builder()
+                            .baseUrl("http://34.82.68.95:3000/")
+                            .addConverterFactory(GsonConverterFactory.create())
+                            .build();
+                    retrofit.create(CommuteAPI.class).commute(token, new CommuteRequest("gps", type, lat, lon, ""))
+                            .enqueue(new Callback<CommuteResponse>() {
+                                @Override
+                                public void onResponse(Call<CommuteResponse> call, Response<CommuteResponse> response) {
+                                    if(response.code() == 200) {
+                                        Log.d("FragmentHome", "성공");
+                                        switch(commuteState) {
+                                            case 1:
+                                                Log.d("FragmentHome", "퇴근 완료");
+                                                break;
+                                            case 2:
+                                            case 3:
+                                                Log.d("FragmentHome", "출근 완료");
+                                                break;
+
+                                        }
+                                        checkCommuteState();
+                                    }
+                                    else if(response.code() == 400) {
+                                        Log.d("FragmentHome", "전달인자 오류");
+                                    }
+                                    else if(response.code() == 401) {
+                                        Log.d("FragmentHome", "토큰 검증 실패");
+                                    }
+                                    else if(response.code() == 406) {
+                                        Log.d("FragmentHome", "위치가 회사가 아님");
+                                    }
+                                    else if(response.code() == 415) {
+                                        Log.d("FragmentHome", "잘못된 요청타입");
+                                    }
+                                    else if(response.code() == 418) {
+                                        Log.d("FragmentHome", "출퇴근 상태 체크 오류");
+                                    }
+                                    else if(response.code() == 500) {
+                                        Log.d("FragmentHome", "서버 오류");
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<CommuteResponse> call, Throwable t) {
+                                    Log.d("FragmentHome", "출퇴근 API 연결 실패");
+                                    t.printStackTrace();
+                                }
+                            });
+                }
+                else {
+                    Toast.makeText(context, "GPS가 연결되어 있지 않습니다.", Toast.LENGTH_SHORT).show();
+                    checkGpsState(view);
+                }
+                break;
+        }
     }
 }
