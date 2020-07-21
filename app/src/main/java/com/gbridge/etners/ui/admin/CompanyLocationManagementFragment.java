@@ -131,7 +131,7 @@ public class CompanyLocationManagementFragment extends Fragment implements View.
 
     private void refreshWifi() {
         currentAp = WifiUtil.getAp(getActivity());
-        String name = WifiUtil.getBssid(getActivity());
+        String name = WifiUtil.getSsid(getActivity());
         String ip = WifiUtil.getIp(getActivity());
 
         if (currentAp != null) {

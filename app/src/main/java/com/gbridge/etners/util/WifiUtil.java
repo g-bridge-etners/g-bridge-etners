@@ -54,16 +54,16 @@ public class WifiUtil {
         }
     }
 
-    public static String getBssid(@NonNull final Context context){
+    public static String getSsid(@NonNull final Context context){
         if (ActivityCompat.checkSelfPermission(context.getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(context.getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED){
             return null;
         }
         final WifiManager wifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         WifiInfo wifiInfo = wifiManager.getConnectionInfo();
-        String bssid = wifiInfo.getBSSID();
-        if(bssid != null){
-            return bssid;
+        String ssid = wifiInfo.getSSID();
+        if(ssid != null){
+            return ssid;
         } else {
             return  null;
         }

@@ -38,7 +38,7 @@
         app:layout_constraintTop_toBottomOf="@id/tv_company_location_gps"/>
     <Button
         android:layout_marginTop="10dp"
-        android:background="@drawable/bg_round_primary_view"
+        android:background="@drawable/bg_primary_button"
         android:text="현재 위치 등록"
         android:id="@+id/btn_company_location_submit_gps"
         android:layout_width="match_parent"
@@ -112,7 +112,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
     <Button
         android:layout_marginTop="10dp"
-        android:background="@drawable/bg_round_primary_view"
+        android:background="@drawable/bg_primary_button"
         android:text="현재 위치 등록"
         android:id="@+id/btn_company_location_submit_wifi"
         android:layout_width="match_parent"
