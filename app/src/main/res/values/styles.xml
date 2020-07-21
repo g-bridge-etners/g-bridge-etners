@@ -10,7 +10,7 @@
     </style>
 
     <style name="ActionBar.nameText" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
-        <item name="android:textColor">@color/colorBalck</item>
+        <item name="android:textColor">@color/colorBlack</item>
         <item name="android:textSize">23sp</item>
         <item name="android:textStyle">bold</item>
     </style>
@@ -41,6 +41,14 @@
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/colorSoftblack</item>
     </style>
+
+
+    <style name="list_rv_divider">
+        <item name="android:layout_width">1dp</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">?android:attr/listDivider</item>
+    </style>
+
 
     <style name="dialog_attendance_management_edit_text">
         <item name="android:textColor">@color/colorSoftblack</item>
