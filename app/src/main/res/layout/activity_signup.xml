@@ -11,86 +11,127 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/signup_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:elevation="4dp"
+        android:background="@color/colorWhite"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:gravity="center"
+        android:gravity="center_vertical"
         android:paddingHorizontal="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/login_id"
+            android:textSize="15sp"
+            android:layout_marginStart="4dp"/>
 
         <EditText
             android:id="@+id/signup_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_round_border"
-            android:hint="@string/signup_id"
+            android:background="@drawable/border_empty"
+            android:hint="@string/login_id_hint"
             android:textSize="20sp"
             android:singleLine="true"
             android:maxLength="9"
             android:inputType="number"
             android:imeOptions="actionNext"
-            android:layout_marginTop="16dp"
-            android:padding="8dp"/>
+            android:layout_marginTop="5dp"
+            android:padding="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/login_pw"
+            android:textSize="15sp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="16dp"/>
 
         <EditText
             android:id="@+id/signup_pw"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_round_border"
-            android:hint="@string/signup_pw"
+            android:background="@drawable/border_empty"
+            android:hint="@string/login_pw_hint"
             android:textSize="20sp"
             android:singleLine="true"
             android:imeOptions="actionNext"
             android:inputType="textPassword"
-            android:layout_marginTop="16dp"
-            android:padding="8dp"/>
+            android:layout_marginTop="5dp"
+            android:padding="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/signup_check"
+            android:textSize="15sp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="16dp"/>
 
         <EditText
             android:id="@+id/signup_check"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_round_border"
-            android:hint="@string/signup_check"
+            android:background="@drawable/border_empty"
+            android:hint="@string/signup_pw_check"
             android:textSize="20sp"
             android:singleLine="true"
             android:imeOptions="actionNext"
             android:inputType="textPassword"
-            android:layout_marginTop="16dp"
-            android:padding="8dp"/>
+            android:layout_marginTop="5dp"
+            android:padding="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/signup_department"
+            android:textSize="15sp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="16dp"/>
 
         <EditText
             android:id="@+id/signup_department"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_round_border"
-            android:hint="@string/signup_department"
+            android:background="@drawable/border_empty"
+            android:hint="@string/signup_department_hint"
             android:textSize="20sp"
             android:singleLine="true"
             android:imeOptions="actionNext"
             android:inputType="text"
-            android:layout_marginTop="16dp"
-            android:padding="8dp"/>
+            android:layout_marginTop="5dp"
+            android:padding="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/signup_name"
+            android:textSize="15sp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="16dp"/>
 
         <EditText
             android:id="@+id/signup_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_round_border"
-            android:hint="@string/signup_name"
+            android:background="@drawable/border_empty"
+            android:hint="@string/signup_name_hint"
             android:textSize="20sp"
             android:singleLine="true"
             android:imeOptions="actionDone"
             android:inputType="text"
-            android:layout_marginTop="16dp"
-            android:padding="8dp"/>
+            android:layout_marginTop="5dp"
+            android:padding="10dp"/>
 
         <Button
             android:id="@+id/signup_signupButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_button"
+            android:background="@drawable/btn_login_background"
             android:text="@string/signup_buttonText"
             android:textColor="@color/colorWhite"
             android:layout_marginTop="16dp"/>

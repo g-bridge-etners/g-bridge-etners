@@ -11,6 +11,9 @@ public class LogInResponse {
     @SerializedName("token")
     private String token;
 
+    @SerializedName("isAdmin")
+    private Boolean isAdmin;
+
     public String getMessage() {
         return message;
     }
@@ -18,4 +21,9 @@ public class LogInResponse {
     public String getToken() {
         return token;
     }
+
+    public Boolean getAdmin() {
+        return isAdmin;
+    }
+
 }

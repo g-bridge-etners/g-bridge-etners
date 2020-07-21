@@ -36,7 +36,7 @@ class LogInService {
 //                }
                 if(response.code() == 200){
                     Log.d("test", "로그인성공");
-                    mLogInActivityView.logInSuccess(logInResponse.getMessage(), logInResponse.getToken());
+                    mLogInActivityView.logInSuccess(logInResponse.getMessage(), logInResponse.getToken(), logInResponse.getAdmin());
                 }else if(response.code() == 400){
                     Log.d("test", "잘못된로그인정보");
                     mLogInActivityView.validateFailure("아이디와 비밀번호를 확인하세요");
@@ -50,11 +50,10 @@ class LogInService {
                     Log.d("test","잘못된 요청타입");
                     mLogInActivityView.validateFailure(null);
                 }else{
-                    Log.d("test","서버 오류");
+                    Log.d("test","서버 오류"+response.code());
                     mLogInActivityView.validateFailure(null);
                 }
-
-        }
+            }
 
             @Override
             public void onFailure(Call<LogInResponse> call, Throwable t) {

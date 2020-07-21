@@ -18,7 +18,7 @@
         style="@style/dialog_attendance_management_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_round_border_admin"
+        android:background="@drawable/border_empty"
         android:hint="@string/dialog_attendance_management_title_hint"
         android:inputType="text" />
 
@@ -35,7 +35,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@drawable/bg_round_border_admin"
+        android:background="@drawable/border_empty"
         android:gravity="top"
         android:hint="@string/dialog_attendance_management_description_hint"
         android:inputType="textMultiLine"
@@ -57,7 +57,7 @@
         style="@style/dialog_attendance_management_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_round_border_admin"
+        android:background="@drawable/border_empty"
         android:cursorVisible="false"
         android:drawableEnd="@drawable/ic_calendar_softblack"
         android:focusable="false"
@@ -77,7 +77,7 @@
         style="@style/dialog_attendance_management_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_round_border_admin"
+        android:background="@drawable/border_empty"
         android:cursorVisible="false"
         android:drawableEnd="@drawable/ic_calendar_softblack"
         android:focusable="false"
@@ -96,7 +96,7 @@
         style="@style/dialog_attendance_management_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_round_border_admin"
+        android:background="@drawable/border_empty"
         android:cursorVisible="false"
         android:drawableEnd="@drawable/ic_schedule_softblack"
         android:focusable="false"
@@ -114,7 +114,7 @@
         style="@style/dialog_attendance_management_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_round_border_admin"
+        android:background="@drawable/border_empty"
         android:cursorVisible="false"
         android:drawableEnd="@drawable/ic_schedule_softblack"
         android:focusable="false"
@@ -127,24 +127,24 @@
         android:orientation="horizontal">
 
         <Button
-            android:textColor="@color/colorSoftblack"
+            android:textColor="@color/colorWhite"
             android:id="@+id/btn_dialog_attendance_management_cancle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
             android:layout_weight="1"
-            android:background="@drawable/bg_primary_button"
+            android:background="@drawable/btn_login_background"
             android:text="취소"
             android:textSize="16sp" />
 
         <Button
-            android:textColor="@color/colorSoftblack"
+            android:textColor="@color/colorWhite"
             android:id="@+id/btn_dialog_attendance_management_submit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
             android:layout_weight="1"
-            android:background="@drawable/bg_primary_button"
+            android:background="@drawable/btn_login_background"
             android:text="만들기"
             android:textSize="16sp" />
     </LinearLayout>

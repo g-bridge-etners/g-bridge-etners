@@ -6,6 +6,6 @@ public interface LogInActivityView {
 
     void validateFailure(String message);
 
-    void logInSuccess(String message, String result);
+    void logInSuccess(String message, String token, Boolean isAdmin);
 
 }

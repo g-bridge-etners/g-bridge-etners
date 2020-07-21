@@ -40,14 +40,22 @@ public class FragmentList extends Fragment implements ListFragmentView {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         viewGroup = (ViewGroup) inflater.inflate(R.layout.fragment_list, container, false);
+
         mListHistory = new ArrayList<ListResponse.ListHistory>();
         mRecyclerView = viewGroup.findViewById(R.id.list_rv);
+
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         mLayoutManager.setReverseLayout(true);
         mLayoutManager.setStackFromEnd(true);
+
         mAdapter = new ListAdapter(mListHistory, getContext());
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(mLayoutManager);
+
+        //toolbar 설정
+        Toolbar mToolbar = viewGroup.findViewById(R.id.list_toolbar);
+        ((MainActivity)getActivity()).setSupportActionBar(mToolbar);
+
 
         getListHistory();
 

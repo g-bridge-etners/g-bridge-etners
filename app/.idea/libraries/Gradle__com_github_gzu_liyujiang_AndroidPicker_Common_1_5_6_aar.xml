@@ -1,0 +1,17 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.gzu-liyujiang.AndroidPicker:Common:1.5.6@aar">
+    <ANNOTATIONS>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/8f011811ff73e23200c3edf45b0c85cf/jetified-Common-1.5.6/annotations.zip!/" />
+    </ANNOTATIONS>
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/8f011811ff73e23200c3edf45b0c85cf/jetified-Common-1.5.6/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/8f011811ff73e23200c3edf45b0c85cf/jetified-Common-1.5.6/res" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.gzu-liyujiang.AndroidPicker/Common/1.5.6/ad8bc04166dcb3ce77156f5f96adeab594984e69/Common-1.5.6-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.gzu-liyujiang.AndroidPicker/Common/1.5.6/e0596e638ff7dab64acee15b8b91c4e0cd48312d/Common-1.5.6-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

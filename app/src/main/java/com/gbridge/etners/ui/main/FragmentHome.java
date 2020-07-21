@@ -36,6 +36,9 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static com.gbridge.etners.ApplicationClass.X_ACCESS_TOKEN;
+import static com.gbridge.etners.ApplicationClass.sSharedPreferences;
+
 public class FragmentHome extends Fragment implements View.OnClickListener {
     private Context context;
     private Activity activity;
@@ -170,6 +173,12 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
                             String clockIn = body.getClock_in();
                             String clockOut = body.getClock_out();
                             Log.d("FragmentHome", "출퇴근 상태 반환 성공");
+
+                            //이름 저장
+                            SharedPreferences.Editor editor = sSharedPreferences.edit();
+                            editor.putString("name",userName);
+                            editor.commit();
+
 
                             name.setText(userName);
                             if(clockIn == null) {

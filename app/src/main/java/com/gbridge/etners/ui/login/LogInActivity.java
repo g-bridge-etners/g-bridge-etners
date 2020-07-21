@@ -95,11 +95,12 @@ public class LogInActivity extends BaseActivity implements LogInActivityView {
 
 
     @Override
-    public void logInSuccess(String message ,String token) {
+    public void logInSuccess(String message ,String token, Boolean isAdmin) {
         hideProgressDialog();
         if(token != null) {
             SharedPreferences.Editor editor = sSharedPreferences.edit();
             editor.putString(X_ACCESS_TOKEN,token);
+            editor.putString("isAdmin", String.valueOf(isAdmin));
             editor.commit();
             Intent resultIntent = new Intent(this, MainActivity.class);
             resultIntent.putExtra("id", mEtId.getText().toString());
@@ -130,4 +131,5 @@ public class LogInActivity extends BaseActivity implements LogInActivityView {
                 break;
         }
     }
+
 }
