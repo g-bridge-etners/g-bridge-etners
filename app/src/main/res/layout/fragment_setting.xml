@@ -1,74 +1,153 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:background="?android:attr/windowBackground"
+    android:orientation="vertical">
 
-    <Button
-        android:id="@+id/setting_admin"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/setting_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/btn_login_background"
-        android:text="관리자 모드"
-        android:textColor="@color/colorWhite"
-        android:textSize="20sp"
-        android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="200dp"/>
+        android:background="?android:attr/windowBackground"
+        android:elevation="4dp"
+        app:title="@string/setting_title"
+        app:titleTextColor="@color/colorSoftblack" />
 
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@drawable/border_empty"
-        android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="32dp">
+        android:layout_height="wrap_content">
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="출퇴근 인증방법"
-            android:textSize="20sp"
-            android:textAlignment="center"
-            android:paddingVertical="8dp"/>
+            android:orientation="vertical">
 
-        <RadioGroup
-            android:id="@+id/setting_methodGroup"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="16dp"
-            android:layout_marginHorizontal="8dp"
-            android:layout_marginBottom="8dp">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:padding="10dp">
 
-            <RadioButton
-                android:id="@+id/setting_methodWifi"
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/profile" />
+
+                <TextView
+                    android:id="@+id/setting_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="15dp"
+                    android:text="홍길동"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="23sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="님 환영합니다."
+                    android:textSize="23sp" />
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/setting_divider_1"
+                style="@style/list_rv_divider"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginHorizontal="25dp"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="@color/colorDivider" />
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Wifi"/>
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/border_empty"
+                android:orientation="vertical">
 
-            <RadioButton
-                android:id="@+id/setting_methodGps"
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="8dp"
+                    android:text="출퇴근 인증방법"
+                    android:textAlignment="center"
+                    android:textSize="20sp" />
+
+                <RadioGroup
+                    android:id="@+id/setting_methodGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/setting_methodWifi"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="Wifi" />
+
+                    <RadioButton
+                        android:id="@+id/setting_methodGps"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="GPS" />
+
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/setting_divider_2"
+                style="@style/list_rv_divider"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginHorizontal="25dp"
+                android:layout_marginTop="32dp"
+                android:backgroundTint="@color/colorDivider" />
+
+            <Button
+                android:id="@+id/setting_logout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="GPS"/>
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/btn_login_background"
+                android:text="로그아웃"
+                android:textColor="@color/colorWhite"
+                android:textSize="20sp" />
 
-        </RadioGroup>
+            <Button
+                android:id="@+id/setting_admin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/btn_login_background"
+                android:text="관리자 모드"
+                android:textColor="@color/colorWhite"
+                android:textSize="20sp" />
 
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/setting_logout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/btn_login_background"
-        android:text="로그아웃"
-        android:textColor="@color/colorWhite"
-        android:textSize="20sp"
-        android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="32dp"/>
-
+            <ImageView
+                android:id="@+id/setting_banner"
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:layout_marginHorizontal="30dp"
+                android:src="@drawable/banner" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 </LinearLayout>

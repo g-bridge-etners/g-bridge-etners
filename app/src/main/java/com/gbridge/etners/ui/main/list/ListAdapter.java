@@ -25,6 +25,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import static com.gbridge.etners.ApplicationClass.DATE_FORMAT;
+import static com.gbridge.etners.ApplicationClass.DATE_FORMAT2;
 import static com.gbridge.etners.ApplicationClass.TIME_FORMAT;
 
 
@@ -128,18 +129,20 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
                 e.printStackTrace();
             }
             Date currentTime = Calendar.getInstance().getTime();
-            String today = DATE_FORMAT.format(currentTime);
+            String today = DATE_FORMAT2.format(currentTime);
+
+            DisplayMetrics dm = mContext.getResources().getDisplayMetrics();
+            int top = Math.round(20 * dm.density);
+            int start = Math.round(20 * dm.density);
+            int end = Math.round(20 * dm.density);
+            int bottom = Math.round(20 * dm.density);
 
             if(today.equals(listHistory.getDate())){
                 holder.mListAll.setBackgroundResource(R.drawable.border_orange);
                 holder.mListDivider.setVisibility(View.GONE);
+                holder.mListAll.setPadding(start, top,end, bottom);
             }else {
                 holder.mListAll.setBackground(null);
-                DisplayMetrics dm = mContext.getResources().getDisplayMetrics();
-                int top = Math.round(20 * dm.density);
-                int start = Math.round(20 * dm.density);
-                int end = Math.round(20 * dm.density);
-                int bottom = Math.round(20 * dm.density);
                 holder.mListAll.setPadding(start, top,end,0);
                 if (position == 0) {
                     holder.mListDivider.setVisibility(View.GONE);
