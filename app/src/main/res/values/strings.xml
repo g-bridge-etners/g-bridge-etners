@@ -14,7 +14,7 @@
     <!-- 바텀 네비게이션 메뉴 -->
     <string name="bnav_home">홈</string>
     <string name="bnav_list">근태기록</string>
-    <string name="bnav_calendar">캘린더</string>
+    <string name="bnav_setting">설정</string>
 
     <!-- 회원가입 -->
     <string name="signup_id">사원번호</string>
