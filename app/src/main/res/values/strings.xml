@@ -20,6 +20,7 @@
     <string name="signup_id">사원번호</string>
     <string name="signup_pw">비밀번호</string>
     <string name="signup_check">비밀번호 재확인</string>
+    <string name="signup_department">부서</string>
     <string name="signup_name">이름</string>
     <string name="signup_buttonText">회원가입</string>
     <string name="signup_toast_idLengthFail">알맞은 사원번호 형식이 아닙니다.</string>

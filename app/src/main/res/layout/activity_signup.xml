@@ -61,6 +61,19 @@
             android:padding="8dp"/>
 
         <EditText
+            android:id="@+id/signup_department"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_round_border"
+            android:hint="@string/signup_department"
+            android:textSize="20sp"
+            android:singleLine="true"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:layout_marginTop="16dp"
+            android:padding="8dp"/>
+
+        <EditText
             android:id="@+id/signup_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
