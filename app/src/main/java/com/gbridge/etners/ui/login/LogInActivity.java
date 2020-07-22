@@ -37,8 +37,10 @@ public class LogInActivity extends BaseActivity implements LogInActivityView {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        getWindow().setBackgroundDrawableResource(android.R.drawable.screen_background_light);
 
+        setContentView(R.layout.activity_login);
+        
         logInService = new LogInService(this);
 
         if (sSharedPreferences == null) {

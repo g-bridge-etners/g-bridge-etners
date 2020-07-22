@@ -118,7 +118,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:background="@drawable/bg_button"
+                    android:background="@drawable/btn_login_background"
                     android:text="출근하기/퇴근하기"
                     android:textColor="@color/colorWhite" />
 
