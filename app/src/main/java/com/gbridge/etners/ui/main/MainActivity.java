@@ -17,10 +17,11 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
+import com.gbridge.etners.BaseActivity;
 import com.gbridge.etners.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends BaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
     private FragmentManager fragmentManager;
     private FragmentHome fragmentHome;
     private FragmentList fragmentList;

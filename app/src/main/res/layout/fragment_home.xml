@@ -10,11 +10,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="인증방법: "
-        android:gravity="center"
         android:background="@color/colorWhite"
-        android:textColor="@color/colorAccent"
+        android:gravity="center"
         android:paddingBottom="15dp"
+        android:text="인증방법: "
+        android:textColor="@color/colorAccent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -188,98 +188,101 @@
 
             </LinearLayout>
 
+
+
             <TextView
                 android:id="@+id/home_solution_title"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:text="BUSINESS"
+                android:textAlignment="center"
                 android:textColor="@color/colorBlack"
                 android:textSize="20sp"
                 android:textStyle="bold" />
+
 
             <GridLayout
                 android:id="@+id/home_solution"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
                 android:columnCount="2"
-                android:rowCount="2">
+                android:orientation="vertical"
+                android:paddingHorizontal="13dp"
+                android:useDefaultMargins="true">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:orientation="vertical">
 
-                    <ImageView
-                        android:layout_width="160dp"
-                        android:layout_height="150dp"
-                        android:src="@drawable/main_solution_1" />
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="150dp"
+                    android:layout_row="0"
+                    android:layout_column="0"
+                    android:layout_columnWeight="1"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/main_solution_1" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="물류 운영 솔루션"
-                        android:textColor="@color/colorLittleBlack" />
-                </LinearLayout>
+                <TextView
+                    android:layout_row="1"
+                    android:layout_rowWeight="1"
+                    android:layout_column="0"
+                    android:layout_gravity="center"
+                    android:text="물류 운영 솔루션"
+                    android:textColor="@color/colorLittleBlack" />
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
 
-                    <ImageView
-                        android:layout_width="160dp"
-                        android:layout_height="150dp"
-                        android:src="@drawable/main_solution_2" />
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="150dp"
+                    android:layout_row="0"
+                    android:layout_column="1"
+                    android:layout_columnWeight="1"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/main_solution_2" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="급여 총 관리 솔루션"
-                        android:textColor="@color/colorLittleBlack" />
-                </LinearLayout>
+                <TextView
+                    android:layout_row="1"
+                    android:layout_rowWeight="1"
+                    android:layout_column="1"
+                    android:layout_gravity="center"
+                    android:text="급여 총 관리 솔루션"
+                    android:textColor="@color/colorLittleBlack" />
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="150dp"
+                    android:layout_row="2"
+                    android:layout_column="0"
+                    android:layout_columnWeight="1"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/main_solution_3" />
 
-                    <ImageView
-                        android:layout_width="160dp"
-                        android:layout_height="150dp"
-                        android:src="@drawable/main_solution_3" />
+                <TextView
+                    android:layout_row="3"
+                    android:layout_rowWeight="1"
+                    android:layout_column="0"
+                    android:layout_gravity="center"
+                    android:text="외국인 복지 몰"
+                    android:textColor="@color/colorLittleBlack" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="외국인 복지 몰"
-                        android:textColor="@color/colorLittleBlack" />
-                </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="150dp"
+                    android:layout_row="2"
+                    android:layout_column="1"
+                    android:layout_columnWeight="1"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/main_solution_4" />
 
-                    <ImageView
-                        android:layout_width="160dp"
-                        android:layout_height="150dp"
-                        android:src="@drawable/main_solution_4" />
+                <TextView
+                    android:layout_row="3"
+                    android:layout_rowWeight="1"
+                    android:layout_column="1"
+                    android:layout_gravity="center"
+                    android:text="자산 관리 솔루션"
+                    android:textColor="@color/colorLittleBlack" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="자산 관리 솔루션"
-                        android:textColor="@color/colorLittleBlack" />
-                </LinearLayout>
             </GridLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
