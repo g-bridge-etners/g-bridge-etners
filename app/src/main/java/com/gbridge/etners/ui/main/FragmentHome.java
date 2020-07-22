@@ -55,6 +55,10 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
     private TextView methodView, date, name, userState, startTime, endTime;
     private Button checkButton;
 
+    public FragmentHome(){
+
+    }
+
     public FragmentHome(Context context, Activity activity, String token) {
         this.context = context;
         this.activity = activity;
@@ -65,6 +69,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+
 
         SharedPreferences sf = context.getSharedPreferences("method", Context.MODE_PRIVATE);
         method = sf.getString("method", "gps");
@@ -87,6 +92,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
         checkCommuteState();
         checkWifiState(view);
         checkGpsState(view);
+
 
         return view;
     }
@@ -202,7 +208,9 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
                                     break;
                                 case "csr0002":
                                     userState.setText("퇴근");
-                                    checkButton.setText("출근하기");
+                                    checkButton.setText("퇴근완료");
+                                    checkButton.setBackgroundResource(R.drawable.bg_round_darkgray_view);
+                                    checkButton.setEnabled(false);
                                     commuteState = 2;
                                     break;
                                 case "csr0003":
@@ -278,6 +286,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
                                     }
                                     else if(response.code() == 406) {
                                         Log.d("FragmentHome", "위치가 회사가 아님");
+                                        Toast.makeText(context, "위치가 회사가 아닙니다.", Toast.LENGTH_SHORT).show();
                                     }
                                     else if(response.code() == 415) {
                                         Log.d("FragmentHome", "잘못된 요청타입");
@@ -335,6 +344,8 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
                                     }
                                     else if(response.code() == 406) {
                                         Log.d("FragmentHome", "위치가 회사가 아님");
+
+                                        Toast.makeText(context, "위치가 회사가 아닙니다.", Toast.LENGTH_SHORT).show();
                                     }
                                     else if(response.code() == 415) {
                                         Log.d("FragmentHome", "잘못된 요청타입");
