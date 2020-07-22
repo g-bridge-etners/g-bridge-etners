@@ -1,7 +1,9 @@
 package com.gbridge.etners.ui.main;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
@@ -22,7 +24,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     private FragmentManager fragmentManager;
     private FragmentHome fragmentHome;
     private FragmentList fragmentList;
-    private FragmentCalendar fragmentCalendar;
+    private FragmentSetting fragmentSetting;
 
     private FrameLayout frame;
     private BottomNavigationView bnav;
@@ -40,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         fragmentManager = getSupportFragmentManager();
         fragmentHome = new FragmentHome(this, this, token);
         fragmentList = new FragmentList();
-        fragmentCalendar = new FragmentCalendar();
+        fragmentSetting = new FragmentSetting(this, this);
 
         checkPermission();
 
@@ -97,11 +99,16 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             case R.id.bnav_list:
                 transaction.replace(R.id.main_frame, fragmentList).commitAllowingStateLoss();
                 return true;
-            case R.id.bnav_calendar:
-                transaction.replace(R.id.main_frame, fragmentCalendar).commitAllowingStateLoss();
+            case R.id.bnav_setting:
+                transaction.replace(R.id.main_frame, fragmentSetting).commitAllowingStateLoss();
                 return true;
         }
         return false;
+    }
+
+    @Override
+    public void onBackPressed() {
+        finishAffinity();
     }
 
     public String getToken() {return token;}

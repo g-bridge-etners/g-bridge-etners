@@ -37,8 +37,10 @@ public class LogInActivity extends BaseActivity implements LogInActivityView {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        getWindow().setBackgroundDrawableResource(android.R.drawable.screen_background_light);
 
+        setContentView(R.layout.activity_login);
+        
         logInService = new LogInService(this);
 
         if (sSharedPreferences == null) {
@@ -56,6 +58,13 @@ public class LogInActivity extends BaseActivity implements LogInActivityView {
         btnSignup = findViewById(R.id.login_signupButton);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mEtId.setText("");
+        mEtPw.setText("");
+    }
+
     private boolean checkValid(){
         id = mEtId.getText().toString();
         pw = mEtPw.getText().toString();
@@ -71,7 +80,6 @@ public class LogInActivity extends BaseActivity implements LogInActivityView {
 
     private void tryPostLogIn(){
         showProgressDialog();
-        //logInService.postLogIn("200000000","000000");
         logInService.postLogIn(id,pw);
     }
 
@@ -89,11 +97,12 @@ public class LogInActivity extends BaseActivity implements LogInActivityView {
 
 
     @Override
-    public void logInSuccess(String message ,String token) {
+    public void logInSuccess(String message ,String token, Boolean isAdmin) {
         hideProgressDialog();
         if(token != null) {
             SharedPreferences.Editor editor = sSharedPreferences.edit();
             editor.putString(X_ACCESS_TOKEN,token);
+            editor.putString("isAdmin", String.valueOf(isAdmin));
             editor.commit();
             Intent resultIntent = new Intent(this, MainActivity.class);
             resultIntent.putExtra("id", mEtId.getText().toString());
@@ -124,4 +133,5 @@ public class LogInActivity extends BaseActivity implements LogInActivityView {
                 break;
         }
     }
+
 }
